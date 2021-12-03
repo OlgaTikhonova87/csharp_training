@@ -42,32 +42,75 @@ namespace WebAddressbookTests
         [Test]
         public void GroupCreationTest()
         {
-            driver.Navigate().GoToUrl(baseURL);
-            driver.FindElement(By.Name("user")).Click();
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys("admin");
-            driver.FindElement(By.Name("pass")).Click();
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys("secret");
-            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
-            driver.FindElement(By.LinkText("groups")).Click();
+            OpenHomePage();
+            Login("admin","secret");
+            GoToGroupsPage();
+            InitGroupCreation();
+            FillGroupForm("GroupName "+DateTime.Now,"Header "+DateTime.Now, "Footer "+ DateTime.Now);
+            Submit();
+            GoToGroupsPage();
+            Logout();
+        }
+
+        private void InitGroupCreation()
+        {
+            //Init New group creation
             driver.FindElement(By.Name("new")).Click();
+        }
+
+        private void Logout()
+        {
+            //Logout
+            driver.FindElement(By.LinkText("Logout")).Click();
+        }
+
+        private void Submit()
+        {
+            //Submit
+            driver.FindElement(By.Name("submit")).Click();
+        }
+
+        private void FillGroupForm(string name, string header, string footer)
+        {
+            //Fill group form
             driver.FindElement(By.Name("group_name")).Click();
             driver.FindElement(By.XPath("//div[@id='content']/form/label")).Click();
             driver.FindElement(By.Name("group_name")).Click();
             driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys("Group name 1");
+            driver.FindElement(By.Name("group_name")).SendKeys(name);
             driver.FindElement(By.Name("group_header")).Click();
             driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys("Group folder 1");
+            driver.FindElement(By.Name("group_header")).SendKeys(header);
             driver.FindElement(By.XPath("//div[@id='content']/form/label[3]")).Click();
             driver.FindElement(By.Name("group_footer")).Click();
             driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys("Group footer 1");
-            driver.FindElement(By.Name("submit")).Click();
-            driver.FindElement(By.LinkText("group page")).Click();
-            driver.FindElement(By.LinkText("Logout")).Click();
+            driver.FindElement(By.Name("group_footer")).SendKeys(footer);
         }
+
+        private void GoToGroupsPage()
+        {
+            //Go to groups Page
+            driver.FindElement(By.LinkText("groups")).Click();
+        }
+
+        private void Login(string usernane, string password)
+        {
+            //Login
+            driver.FindElement(By.Name("user")).Click();
+            driver.FindElement(By.Name("user")).Clear();
+            driver.FindElement(By.Name("user")).SendKeys(usernane);
+            driver.FindElement(By.Name("pass")).Click();
+            driver.FindElement(By.Name("pass")).Clear();
+            driver.FindElement(By.Name("pass")).SendKeys(password);
+            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
+        }
+
+        private void OpenHomePage()
+        {
+            //Open home page
+            driver.Navigate().GoToUrl(baseURL);
+        }
+
         private bool IsElementPresent(By by)
         {
             try
