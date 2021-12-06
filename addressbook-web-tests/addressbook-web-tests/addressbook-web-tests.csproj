@@ -67,11 +67,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="cAdressBookAccountData.cs" />
+    <Compile Include="cFigureCircle.cs" />
+    <Compile Include="cFigure.cs" />
+    <Compile Include="cAdressBookGroupData.cs" />
+    <Compile Include="cFigureSquare.cs" />
+    <Compile Include="tFigureTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GroupCreationTests.cs" />
+    <Compile Include="tAdressBookGroupCreationTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="dDiagramFigure.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
