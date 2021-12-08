@@ -10,21 +10,16 @@ using OpenQA.Selenium.Support.UI;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupCreationTests
+    public class GroupCreationTests: BaseTest
     {
-        private IWebDriver driver;
-        private StringBuilder verificationErrors;
-        private string baseURL;
+        //private string baseURL = "http://localhost/addressbook";
         private bool acceptNextAlert = true;
 
-        [SetUp]
-        public void SetupTest()
-        {
-            driver = new FirefoxDriver();
-            baseURL = "http://localhost/addressbook";
-            verificationErrors = new StringBuilder();
-        }
 
+        public GroupCreationTests(): base("http://localhost/addressbook")
+        {
+            
+        }
         [TearDown]
         public void TeardownTest()
         {
@@ -55,7 +50,7 @@ namespace WebAddressbookTests
             Logout();
         }
 
-        private void InitGroupCreation()
+        public void InitGroupCreation()
         {
             //Init New group creation
             driver.FindElement(By.Name("new")).Click();
@@ -108,7 +103,7 @@ namespace WebAddressbookTests
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
         }
 
-        private void OpenHomePage()
+        public void OpenHomePage()
         {
             //Open home page
             driver.Navigate().GoToUrl(baseURL);

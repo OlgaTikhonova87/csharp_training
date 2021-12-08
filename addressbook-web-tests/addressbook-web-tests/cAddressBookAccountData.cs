@@ -9,8 +9,8 @@ namespace WebAddressbookTests
     class AccountData
     {
         // перменные в классе
-        private string username; 
-        private string password;
+        public string username; 
+        public string password;
 
         //конструктор класса. Позволит создавать объект по этому классу
         public AccountData(string username, string password)
