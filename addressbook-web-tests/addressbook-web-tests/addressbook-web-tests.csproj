@@ -75,11 +75,13 @@
     <Compile Include="cAddressBookGroupData.cs" />
     <Compile Include="cFigureSquare.cs" />
     <Compile Include="tAddressBookAdressCreationTests.cs" />
+    <Compile Include="tAddressBookGroupRemovalTests.cs" />
     <Compile Include="tFigureTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tAddressBookGroupCreationTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="dDiagramFigure.cd" />
     <None Include="packages.config" />
   </ItemGroup>
