@@ -11,7 +11,8 @@ namespace WebAddressbookTests
     {
         [Test]
         public void GroupRemovOpenHomePage()
-        { 
+        {
+            app.Navigator.OpenHomePage();
             app.Auth.Login(new AccountData("admin", "secret"));
             app.Navigator.GoToGroupsPage();
             app.Groups.SelectGroup(1);

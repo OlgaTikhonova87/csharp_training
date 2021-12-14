@@ -78,7 +78,7 @@ namespace WebAddressbookTests
             new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(address.bmonth);
             driver.FindElement(By.Name("byear")).Click();
             driver.FindElement(By.Name("byear")).Clear();
-            driver.FindElement(By.Name("byear")).SendKeys(address.byear);
+            driver.FindElement(By.Name("byear")).SendKeys(address.byear) ;
 
             driver.FindElement(By.Name("aday")).Click();
             new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText(address.aday);
@@ -88,7 +88,7 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("ayear")).Clear();
             driver.FindElement(By.Name("ayear")).SendKeys(address.ayear);
 
-            driver.FindElement(By.Name("new_group")).Click();
+            driver.FindElement(By.Name("new_group")).Click(); 
             new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText(address.group);
         }
     }
