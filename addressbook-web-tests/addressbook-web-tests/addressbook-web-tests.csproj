@@ -67,27 +67,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseTest.cs" />
-    <Compile Include="cAddressBookAccountData.cs" />
-    <Compile Include="cAddressBookAddressData.cs" />
-    <Compile Include="cFigureCircle.cs" />
-    <Compile Include="cFigure.cs" />
-    <Compile Include="cAddressBookGroupData.cs" />
-    <Compile Include="cFigureSquare.cs" />
-    <Compile Include="tAddressBookAdressCreationTests.cs" />
-    <Compile Include="tAddressBookGroupRemovalTests.cs" />
-    <Compile Include="tFigureTest.cs" />
+    <Compile Include="appmanager\bAddressHelper.cs" />
+    <Compile Include="tests\bBaseTest.cs" />
+    <Compile Include="appmanager\bGroupHelper.cs" />
+    <Compile Include="appmanager\bLoginHelper.cs" />
+    <Compile Include="appmanager\bNavigationHelper.cs" />
+    <Compile Include="model\cAddressBookAccountData.cs" />
+    <Compile Include="model\cAddressBookAddressData.cs" />
+    <Compile Include="figures\cFigureCircle.cs" />
+    <Compile Include="figures\cFigure.cs" />
+    <Compile Include="model\cAddressBookGroupData.cs" />
+    <Compile Include="figures\cFigureSquare.cs" />
+    <Compile Include="appmanager\bHelperBase.cs" />
+    <Compile Include="appmanager\mApplicationManager.cs" />
+    <Compile Include="tests\tAddressBookAdressCreationTests.cs" />
+    <Compile Include="tests\tAddressBookGroupRemovalTests.cs" />
+    <Compile Include="figures\tFigureTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="tAddressBookGroupCreationTests.cs" />
+    <Compile Include="tests\tAddressBookGroupCreationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
-    <None Include="dDiagramFigure.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

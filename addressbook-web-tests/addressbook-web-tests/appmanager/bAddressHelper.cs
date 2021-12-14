@@ -1,59 +1,15 @@
-﻿using System;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
-    [TestFixture]
-    public class AddressBookAdressCreationTests : BaseTest
+    public class bAddressHelper : HelperBase
     {
-        [Test]
-        public void AddressCreationTest()
-        {
+         public bAddressHelper(IWebDriver driver) : base(driver)
+         {
 
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            InitCreation();
-
-            AddressData address = new AddressData("First Name " + DateTime.Now)
-            {
-                MiddleName = "MiddleName " + DateTime.Now,
-                LastName = "lastname " + DateTime.Now,
-                NickName = "nickname " + DateTime.Now,
-                Title = "Title " + DateTime.Now,
-                Company = "Company " + DateTime.Now,
-                Address = "Address " + DateTime.Now,
-                HomePhone = "4556789",
-                MobilePhone = "3223232",
-                WorkPhone = "7686788",
-                Fax = "5467657",
-                Mail1 = "Mail1 " + DateTime.Now,
-                Mail2 = "Mail2 " + DateTime.Now,
-                Mail3 = "Mail3 " + DateTime.Now,
-                HomePage = "HomePage " + DateTime.Now,
-                Address2 = "address2 " + DateTime.Now,
-                Phone2 = "phone2 " + DateTime.Now,
-                Notes = "notes " + DateTime.Now,
-                BDay = DateTime.Now.Day.ToString(),
-                BMonth = "April",
-                BYear = (DateTime.Now.Year - 30).ToString(),
-                ADay = DateTime.Now.Day.ToString(),
-                AMonth = "May",
-                AYear = (DateTime.Now.Year - 1).ToString(),
-                Group = "GroupName 03.12.2021 18:06:39",
-                Photo = "C:\\fakepath\\95384925.jpg"
-            };
-
-            FillAddressForm(address);
-            Submit();
-            Logout();
-        }
-        private void FillAddressForm(AddressData address)
+         }
+        public void FillAddressForm(AddressData address)
         {
             //Fill address form
             driver.FindElement(By.Name("firstname")).Click();
@@ -135,9 +91,5 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("new_group")).Click();
             new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText(address.group);
         }
-
-             
     }
-
 }
-
