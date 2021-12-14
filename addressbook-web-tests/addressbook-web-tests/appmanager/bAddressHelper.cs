@@ -5,11 +5,18 @@ namespace WebAddressbookTests
 {
     public class bAddressHelper : HelperBase
     {
-         public bAddressHelper(IWebDriver driver) : base(driver)
+         public bAddressHelper(mApplicationManager manager) : base(manager)
          {
 
          }
-        public void FillAddressForm(AddressData address)
+        public bAddressHelper CreateAddress(AddressData address)
+        {
+            manager.Groups.InitCreation();
+            FillAddressForm(address);
+            manager.Groups.Submit();
+            return this;
+        }
+        public bAddressHelper FillAddressForm(AddressData address)
         {
             //Fill address form
             driver.FindElement(By.Name("firstname")).Click();
@@ -87,9 +94,10 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("ayear")).Click();
             driver.FindElement(By.Name("ayear")).Clear();
             driver.FindElement(By.Name("ayear")).SendKeys(address.ayear);
+            return this;
 
-            driver.FindElement(By.Name("new_group")).Click(); 
-            new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText(address.group);
+            //driver.FindElement(By.Name("new_group")).Click(); 
+            //new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText(address.group);
         }
     }
 }

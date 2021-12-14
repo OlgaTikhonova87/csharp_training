@@ -1,11 +1,10 @@
 ﻿using OpenQA.Selenium;
 
-
 namespace WebAddressbookTests
 {
     public class bLoginHelper : HelperBase
     {
-        public bLoginHelper(IWebDriver driver) : base(driver)
+        public bLoginHelper(mApplicationManager manager) : base(manager)
         {
 
         }

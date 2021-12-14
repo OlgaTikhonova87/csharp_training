@@ -9,10 +9,6 @@ namespace WebAddressbookTests
         [Test]
         public void AddressCreationTest()
         {
-
-            app.Navigator.OpenHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.Groups.InitCreation();
             AddressData address = new AddressData("First Name " + DateTime.Now)
             {
                 MiddleName = "MiddleName " + DateTime.Now,
@@ -41,9 +37,7 @@ namespace WebAddressbookTests
                 Group = "GroupName 03.12.2021 18:06:39",
                 Photo = "C:\\fakepath\\95384925.jpg"
             };
-            app.Address.FillAddressForm(address);
-            app.Groups.Submit();
-            app.Auth.Logout();
+            app.Address.CreateAddress(address);
         }
        
     }

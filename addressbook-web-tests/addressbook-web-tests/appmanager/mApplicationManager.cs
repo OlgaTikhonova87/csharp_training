@@ -21,12 +21,11 @@ namespace WebAddressbookTests
             {
             driver = new FirefoxDriver();
 
-            bloginHelper = new bLoginHelper(driver);
-            bnavigationHelper = new bNavigationHelper(driver, baseURL);
-            bgroupHelper = new bGroupHelper(driver);
-            baddressHelper = new bAddressHelper(driver);
+            bloginHelper = new bLoginHelper(this);
+            bnavigationHelper = new bNavigationHelper(this, baseURL);
+            bgroupHelper = new bGroupHelper(this);
+            baddressHelper = new bAddressHelper(this);
             
-         //   baseURL = "http://localhost";
             verificationErrors = new StringBuilder();
         }
         public bLoginHelper Auth
@@ -58,7 +57,14 @@ namespace WebAddressbookTests
                 return baddressHelper;
             }
         }
-        
+
+        public IWebDriver Driver 
+        {
+            get 
+            {
+                return driver;
+            }
+        }
 
         public void Stop()
         {
