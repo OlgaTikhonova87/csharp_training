@@ -80,6 +80,9 @@
     <Compile Include="figures\cFigureSquare.cs" />
     <Compile Include="appmanager\bHelperBase.cs" />
     <Compile Include="appmanager\mApplicationManager.cs" />
+    <Compile Include="tests\tAddressBookAdressModificationTests.cs" />
+    <Compile Include="tests\tAddressBookAdressRemovalTests.cs" />
+    <Compile Include="tests\tAddressBookGroupModificationTests.cs" />
     <Compile Include="tests\tAddressBookAdressCreationTests.cs" />
     <Compile Include="tests\tAddressBookGroupRemovalTests.cs" />
     <Compile Include="figures\tFigureTest.cs" />

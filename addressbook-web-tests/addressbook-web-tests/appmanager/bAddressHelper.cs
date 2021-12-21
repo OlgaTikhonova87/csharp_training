@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
+
 namespace WebAddressbookTests
 {
     public class bAddressHelper : HelperBase
@@ -9,6 +10,15 @@ namespace WebAddressbookTests
          {
 
          }
+
+        public bAddressHelper RemoveAddress(string v)
+        {
+            driver.FindElement(By.Id(v)).Click();
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            driver.SwitchTo().Alert().Accept();
+            return this;
+        }
+
         public bAddressHelper CreateAddress(AddressData address)
         {
             manager.Groups.InitCreation();
@@ -98,6 +108,27 @@ namespace WebAddressbookTests
 
             //driver.FindElement(By.Name("new_group")).Click(); 
             //new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText(address.group);
+        }
+
+        public bAddressHelper ModifyAddress(int v, AddressData address)
+        {
+            manager.Address.AddressModificationInitiation(v);
+            FillAddressForm(address);
+            manager.Address.SubmitAddressModification();
+            return this;
+        }
+
+        public bAddressHelper AddressModificationInitiation(int v)
+        {
+            //driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr["+v+"]/td[8]/a/img")).Click();
+            return this;
+        }
+
+        public bAddressHelper SubmitAddressModification()
+        {
+            driver.FindElement(By.XPath("//div[@id='content']/form/input[22]")).Click();
+            return this;
         }
     }
 }
