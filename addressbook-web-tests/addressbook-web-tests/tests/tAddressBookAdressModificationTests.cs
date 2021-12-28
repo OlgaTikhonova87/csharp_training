@@ -36,7 +36,7 @@ namespace WebAddressbookTests
                 Group = "GroupName 03.12.2021 18:06:39",
                 Photo = "C:\\fakepath\\95384925.jpg"
             };
-            app.Address.ModifyAddress(7, address);
+            app.Address.ModifyAddress(address);
 
         }
     }

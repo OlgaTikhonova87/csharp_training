@@ -110,18 +110,17 @@ namespace WebAddressbookTests
             //new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByText(address.group);
         }
 
-        public bAddressHelper ModifyAddress(int v, AddressData address)
+        public bAddressHelper ModifyAddress(AddressData address)
         {
-            manager.Address.AddressModificationInitiation(v);
+            manager.Address.AddressModificationInitiation();
             FillAddressForm(address);
             manager.Address.SubmitAddressModification();
             return this;
         }
 
-        public bAddressHelper AddressModificationInitiation(int v)
+        public bAddressHelper AddressModificationInitiation()
         {
-            //driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
-            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr["+v+"]/td[8]/a/img")).Click();
+             driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img")).Click();
             return this;
         }
 
