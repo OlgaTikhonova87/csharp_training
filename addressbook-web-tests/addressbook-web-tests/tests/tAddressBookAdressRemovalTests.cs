@@ -3,12 +3,18 @@ using NUnit.Framework;
 
 namespace WebAddressbookTests
 {
-    class tAddressBookAdressRemovalTests : bBaseTest
+    class tAddressBookAdressRemovalTests : AuthTestBase
     {
         [Test]
         public void AddressModificationTest()
         {
-            app.Address.RemoveAddress("34");
+            AddressData address = new AddressData("b")
+            {
+                MiddleName = "MiddleName2",
+                LastName = "a"
+
+            };
+            app.Address.RemoveAddress(address);
         }
     }
 }

@@ -3,12 +3,13 @@
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupRemovalTests : bBaseTest
+    public class GroupRemovalTests : AuthTestBase
     {
         [Test]
         public void GroupRemove()
         {
-            app.Groups.Remove(1);
+            GroupData newData = new GroupData("GroupName");
+            app.Groups.Remove(newData);
         } 
     }
 }

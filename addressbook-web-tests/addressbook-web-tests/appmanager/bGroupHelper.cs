@@ -10,81 +10,13 @@ namespace WebAddressbookTests
         {
 
         }
-        public bGroupHelper Removal()
-        {
-            driver.FindElement(By.Name("delete")).Click();
-            return this;
-        }
-
-        public bGroupHelper Modify(int v, GroupData newData)
-        {
-            manager.Navigator.GoToGroupsPage();
-            SelectGroup(v);
-            InitGroupModification();
-            FillGroupForm(newData);
-            SubmitGroupModification();
-            manager.Navigator.GoToGroupsPage();
-            return this;
-        }
-
-        public bGroupHelper SubmitGroupModification()
-        {
-            driver.FindElement(By.Name("update")).Click();
-            return this;
-        }
-
-        public bGroupHelper InitGroupModification()
-        {
-            driver.FindElement(By.Name("edit")).Click();
-            return this;
-        }
-
-        public bGroupHelper Remove(int v)
-        {
-            manager.Navigator.GoToGroupsPage();
-            SelectGroup(v);
-            Removal();
-            manager.Navigator.GoToGroupsPage();
-            return this;
-        }
-
-        public bGroupHelper SelectGroup(int index)
-        {
-            driver.FindElement(By.XPath("//div[@id='content']/form/span[" + index + "]/input")).Click();
-            return this;
-        }
-        public bGroupHelper InitGroupCreation()
-        {
-            //Init New group creation
-            driver.FindElement(By.Name("new")).Click();
-            return this;
-        }
-
-        public bGroupHelper Submit()
-        {
-            //Submit
-            driver.FindElement(By.Name("submit")).Click();
-            return this;
-        }
-
-        public bGroupHelper FillGroupForm(GroupData groupdata)
-        {
-            //Fill group form
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.XPath("//div[@id='content']/form/label")).Click();
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(groupdata.GroupName);
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(groupdata.GroupHeader);
-            driver.FindElement(By.XPath("//div[@id='content']/form/label[3]")).Click();
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(groupdata.GroupFooter);
-            return this;
-        }
-
+        //CREATION
+        //public bGroupHelper InitCreation()
+        //{
+        //    driver.FindElement(By.LinkText("add new")).Click();
+        //    return this;
+        //}
+     
         public bGroupHelper Create(GroupData groupdata)
         {
             manager.Navigator.GoToGroupsPage();
@@ -94,12 +26,84 @@ namespace WebAddressbookTests
             manager.Navigator.GoToGroupsPage();
             return this;
         }
-        public bGroupHelper InitCreation()
+        public bGroupHelper InitGroupCreation()
         {
-            //Init New creation
-            driver.FindElement(By.LinkText("add new")).Click();
+            driver.FindElement(By.Name("new")).Click();
+            return this;
+        }
+        //MODIFY
+        public bGroupHelper Modify(GroupData newData, GroupData oldData)
+        {
+            manager.Navigator.GoToGroupsPage();
+            if (!IsGroupExist(oldData.groupname) )
+            {
+                Create(oldData);
+            }
+
+            SelectGroup(oldData.groupname);
+            InitGroupModification();
+            FillGroupForm(newData);
+            SubmitGroupModification();
+            manager.Navigator.GoToGroupsPage();
+            return this;
+        }
+        public bGroupHelper InitGroupModification()
+        {
+            driver.FindElement(By.Name("edit")).Click();
+            return this;
+        }
+        public bGroupHelper SubmitGroupModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+ 
+        //REMOVE
+        public bGroupHelper Remove(GroupData newData)
+        {
+            manager.Navigator.GoToGroupsPage();
+            if (!IsGroupExist(newData.groupname) )
+            {
+                Create(newData);
+            }
+
+            SelectGroup(newData.groupname);
+            Removal();
+            manager.Navigator.GoToGroupsPage();
+            return this;
+        }
+        public bGroupHelper Removal()
+        {
+            driver.FindElement(By.Name("delete")).Click();
             return this;
         }
 
+        //ADDITIONAL
+        public bGroupHelper SelectGroup(string groupname)
+        {
+            // поменять на по имени как-то? Тут возник вопрос (надо спросить).
+            // Могу я как-то из всего многообразия перебрать все группы и найти
+            // с нужным названием или пока оставляем так? Или вообще как оно работает...
+            driver.FindElement(By.XPath("//input[@name='selected[]']")).Click();
+            return this;
+        }
+        public bGroupHelper Submit()
+        {
+            driver.FindElement(By.Name("submit")).Click();
+            return this;
+        }
+        public bGroupHelper FillGroupForm(GroupData groupdata)
+        {
+            Type(By.Name("group_name"), groupdata.GroupName);
+            Type(By.Name("group_header"), groupdata.GroupHeader);
+            Type(By.Name("group_footer"), groupdata.GroupFooter);
+            return this;
+        }  
+        public bool IsGroupExist(string groupname)
+        {
+            return driver.FindElement(By.XPath("//input[@name='selected[]']")).Text == groupname;
+
+            //div[@id='content']/form/span"
+        }
     }
 }

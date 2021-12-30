@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="appmanager\bAddressHelper.cs" />
+    <Compile Include="tests\AuthTestBase.cs" />
     <Compile Include="tests\bBaseTest.cs" />
     <Compile Include="appmanager\bGroupHelper.cs" />
     <Compile Include="appmanager\bLoginHelper.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="figures\cFigureSquare.cs" />
     <Compile Include="appmanager\bHelperBase.cs" />
     <Compile Include="appmanager\mApplicationManager.cs" />
+    <Compile Include="tests\LoginTests.cs" />
     <Compile Include="tests\tAddressBookAdressModificationTests.cs" />
     <Compile Include="tests\tAddressBookAdressRemovalTests.cs" />
     <Compile Include="tests\tAddressBookGroupModificationTests.cs" />

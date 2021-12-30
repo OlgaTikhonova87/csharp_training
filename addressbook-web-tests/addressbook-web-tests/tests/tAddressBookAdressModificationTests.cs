@@ -3,15 +3,15 @@ using NUnit.Framework;
 
 namespace WebAddressbookTests
 {
-    class tAddressBookAdressModificationTests : bBaseTest
+    class tAddressBookAdressModificationTests : AuthTestBase
     {
         [Test]
         public void AddressModificationTest()
         {
-            AddressData address = new AddressData("First Name " + DateTime.Now)
+            AddressData address = new AddressData("uuu")
             {
                 MiddleName = "MiddleName2 " + DateTime.Now,
-                LastName = "lastname2 " + DateTime.Now,
+                LastName = "kkk",
                 NickName = "nickname2 " + DateTime.Now,
                 Title = "Title2 " + DateTime.Now,
                 Company = "Company2 " + DateTime.Now,
@@ -36,7 +36,14 @@ namespace WebAddressbookTests
                 Group = "GroupName 03.12.2021 18:06:39",
                 Photo = "C:\\fakepath\\95384925.jpg"
             };
-            app.Address.ModifyAddress(address);
+            AddressData oldaddress = new AddressData("a")
+            {
+                MiddleName = "MiddleName2 " + DateTime.Now,
+                LastName = "b",
+                NickName = "nickname2 " + DateTime.Now
+            };
+                app.Address.ModifyAddress(address, oldaddress);
+             
 
         }
     }

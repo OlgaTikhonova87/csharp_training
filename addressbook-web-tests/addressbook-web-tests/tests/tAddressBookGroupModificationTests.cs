@@ -3,15 +3,18 @@
 namespace WebAddressbookTests
 {
     [TestFixture]
-   public class tGroupModificationTests : bBaseTest
+   public class tGroupModificationTests : AuthTestBase
     {
         [Test]
         public void GroupModification()
         {
-            GroupData newData = new GroupData("GroupName");
-            newData.GroupHeader = "header";
-            newData.GroupFooter = "footer";
-            app.Groups.Modify(7, newData);
+            GroupData oldData = new GroupData("OldGroupName");
+
+            GroupData newData = new GroupData("ChangedGroupName");
+            newData.GroupHeader = "header is changed";
+            newData.GroupFooter = "footer is changed";
+
+            app.Groups.Modify(newData, oldData);
         }
     }
 }
