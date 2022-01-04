@@ -14,7 +14,11 @@ namespace WebAddressbookTests
             newData.GroupHeader = "header is changed";
             newData.GroupFooter = "footer is changed";
 
-            app.Groups.Modify(newData, oldData);
+            if (!app.Groups.IsGroupExist(newData.groupname))
+            {
+                app.Groups.Create(newData);
+            }
+            app.Groups.Modify(newData);
         }
     }
 }

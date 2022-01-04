@@ -25,12 +25,8 @@ namespace WebAddressbookTests
             return this;
         }
         //MODIFICATION
-        public bAddressHelper ModifyAddress(AddressData address, AddressData oldaddress)
+        public bAddressHelper ModifyAddress(AddressData address)
         {
-            if (!IsAddressExist(oldaddress.lastname, oldaddress.firstname))
-            {
-                CreateAddress(oldaddress);
-            }
             AddressModificationInitiation();
             FillAddressForm(address);
             SubmitAddressModification();
@@ -47,12 +43,8 @@ namespace WebAddressbookTests
             return this;
         }
         //REMOVE
-        public bAddressHelper RemoveAddress(AddressData address)
+        public bAddressHelper RemoveAddress()
         {
-            if (!IsAddressExist(address.lastname, address.firstname))
-                {
-                    CreateAddress(address);
-                }
             driver.FindElement(By.XPath("/html/body/div/div[2]/a/img")).Click();
             driver.FindElement(By.Name("selected[]")).Click();
 
@@ -91,7 +83,7 @@ namespace WebAddressbookTests
 
             return this;
         }
-        private bool IsAddressExist(string lastname, string firstname)
+        public bool IsAddressExist(string lastname, string firstname)
         {
             string gg;
             gg = driver.FindElement(By.Name("selected[]")).GetAttribute("title");

@@ -12,9 +12,12 @@ namespace WebAddressbookTests
             {
                 MiddleName = "MiddleName2",
                 LastName = "a"
-
             };
-            app.Address.RemoveAddress(address);
+            if (!app.Address.IsAddressExist(address.lastname, address.firstname))
+            {
+                app.Address.CreateAddress(address);
+            }
+            app.Address.RemoveAddress();
         }
     }
 }

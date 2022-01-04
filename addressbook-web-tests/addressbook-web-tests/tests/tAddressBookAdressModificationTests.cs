@@ -42,7 +42,11 @@ namespace WebAddressbookTests
                 LastName = "b",
                 NickName = "nickname2 " + DateTime.Now
             };
-                app.Address.ModifyAddress(address, oldaddress);
+            if (!app.Address.IsAddressExist(address.lastname, address.firstname))
+            {
+                app.Address.CreateAddress(address);
+            }
+            app.Address.ModifyAddress(address);
              
 
         }

@@ -32,15 +32,11 @@ namespace WebAddressbookTests
             return this;
         }
         //MODIFY
-        public bGroupHelper Modify(GroupData newData, GroupData oldData)
+        public bGroupHelper Modify(GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
-            if (!IsGroupExist(oldData.groupname) )
-            {
-                Create(oldData);
-            }
 
-            SelectGroup(oldData.groupname);
+            SelectGroup();
             InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();
@@ -59,15 +55,10 @@ namespace WebAddressbookTests
         }
  
         //REMOVE
-        public bGroupHelper Remove(GroupData newData)
+        public bGroupHelper Remove()
         {
             manager.Navigator.GoToGroupsPage();
-            if (!IsGroupExist(newData.groupname) )
-            {
-                Create(newData);
-            }
-
-            SelectGroup(newData.groupname);
+            SelectGroup();
             Removal();
             manager.Navigator.GoToGroupsPage();
             return this;
@@ -79,7 +70,7 @@ namespace WebAddressbookTests
         }
 
         //ADDITIONAL
-        public bGroupHelper SelectGroup(string groupname)
+        public bGroupHelper SelectGroup()
         {
             // поменять на по имени как-то? Тут возник вопрос (надо спросить).
             // Могу я как-то из всего многообразия перебрать все группы и найти
