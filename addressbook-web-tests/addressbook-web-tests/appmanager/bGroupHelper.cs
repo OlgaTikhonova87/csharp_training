@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using System;
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
@@ -26,17 +27,18 @@ namespace WebAddressbookTests
             manager.Navigator.GoToGroupsPage();
             return this;
         }
+
         public bGroupHelper InitGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
             return this;
         }
         //MODIFY
-        public bGroupHelper Modify(GroupData newData)
+        public bGroupHelper Modify(GroupData newData, int index)
         {
             manager.Navigator.GoToGroupsPage();
 
-            SelectGroup();
+            SelectGroup(index);
             InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();
@@ -55,10 +57,10 @@ namespace WebAddressbookTests
         }
  
         //REMOVE
-        public bGroupHelper Remove()
+        public bGroupHelper Remove(int index)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectGroup();
+            SelectGroup(index);
             Removal();
             manager.Navigator.GoToGroupsPage();
             return this;
@@ -70,12 +72,9 @@ namespace WebAddressbookTests
         }
 
         //ADDITIONAL
-        public bGroupHelper SelectGroup()
+        public bGroupHelper SelectGroup(int index)
         {
-            // поменять на по имени как-то? Тут возник вопрос (надо спросить).
-            // Могу я как-то из всего многообразия перебрать все группы и найти
-            // с нужным названием или пока оставляем так? Или вообще как оно работает...
-            driver.FindElement(By.XPath("//input[@name='selected[]']")).Click();
+            driver.FindElement(By.Name("selected[]")).Click();
             return this;
         }
         public bGroupHelper Submit()
@@ -93,8 +92,18 @@ namespace WebAddressbookTests
         public bool IsGroupExist(string groupname)
         {
             return driver.FindElement(By.XPath("//input[@name='selected[]']")).Text == groupname;
+        }
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            manager.Navigator.GoToGroupsPage();
+           ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach (IWebElement element in elements)
+            {
+                groups.Add(new GroupData(element.Text));
+            }
 
-            //div[@id='content']/form/span"
+            return groups;
         }
     }
 }

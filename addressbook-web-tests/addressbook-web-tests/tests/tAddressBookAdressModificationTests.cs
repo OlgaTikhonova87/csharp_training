@@ -1,9 +1,10 @@
 ﻿using System;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace WebAddressbookTests
 {
-    class tAddressBookAdressModificationTests : AuthTestBase
+    class AddressBookAdressModificationTests : AuthTestBase
     {
         [Test]
         public void AddressModificationTest()
@@ -42,7 +43,7 @@ namespace WebAddressbookTests
                 LastName = "b",
                 NickName = "nickname2 " + DateTime.Now
             };
-            if (!app.Address.IsAddressExist(address.lastname, address.firstname))
+            if (!app.Groups.IsElementPresent(By.Name("selected[]")))
             {
                 app.Address.CreateAddress(address);
             }

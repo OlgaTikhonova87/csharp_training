@@ -17,8 +17,16 @@ namespace WebAddressbookTests
             InitCreation();
             FillAddressForm(address);
             manager.Groups.Submit();
+            OpenAddressBook();
             return this;
         }
+
+        public bAddressHelper OpenAddressBook()
+        {
+            driver.FindElement(By.XPath("/html/body/div/div[2]/a/img")).Click();
+            return this;
+        }
+
         public bAddressHelper InitCreation()
         {
             driver.FindElement(By.LinkText("add new")).Click();

@@ -1,19 +1,20 @@
 ﻿using System;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace WebAddressbookTests
 {
-    class tAddressBookAdressRemovalTests : AuthTestBase
+    class AddressBookAdressRemovalTests : AuthTestBase
     {
         [Test]
-        public void AddressModificationTest()
+        public void AddressRemovalTest()
         {
             AddressData address = new AddressData("b")
             {
                 MiddleName = "MiddleName2",
                 LastName = "a"
             };
-            if (!app.Address.IsAddressExist(address.lastname, address.firstname))
+            if (!app.Groups.IsElementPresent(By.Name("selected[]")))
             {
                 app.Address.CreateAddress(address);
             }
