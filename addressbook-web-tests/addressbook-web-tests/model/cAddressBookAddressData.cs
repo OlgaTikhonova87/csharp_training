@@ -1,6 +1,7 @@
-﻿namespace WebAddressbookTests
+﻿using System;
+namespace WebAddressbookTests
 {
-  public class AddressData
+  public class AddressData : IEquatable<AddressData>, IComparable<AddressData>
     {
         
         public string firstname;
@@ -30,9 +31,10 @@
         public string group = "";
         public string photo = "";
 
-        public AddressData(string firstname)
+        public AddressData(string firstname, string lastname) 
         {
             this.firstname= firstname;
+            this.lastname = lastname;
         }
 
         public string FirstName
@@ -320,6 +322,30 @@
             {
                 return photo;
             }
+        }
+
+
+        public int CompareTo(AddressData other)
+        {
+            if (object.ReferenceEquals(null, other))
+            {
+                return 1;
+            }
+
+            return FirstName.CompareTo(other.FirstName) & LastName.CompareTo(other.LastName);
+        }
+
+        public bool Equals(AddressData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (Object.ReferenceEquals(other, this))
+            {
+                return true;
+            }
+            return FirstName == other.FirstName && lastname == other.lastname;
         }
     }
 }

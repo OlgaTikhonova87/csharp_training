@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -9,10 +10,9 @@ namespace WebAddressbookTests
         [Test]
         public void AddressModificationTest()
         {
-            AddressData address = new AddressData("uuu")
+            AddressData address = new AddressData("uuu", "gggg")
             {
                 MiddleName = "MiddleName2 " + DateTime.Now,
-                LastName = "kkk",
                 NickName = "nickname2 " + DateTime.Now,
                 Title = "Title2 " + DateTime.Now,
                 Company = "Company2 " + DateTime.Now,
@@ -37,19 +37,25 @@ namespace WebAddressbookTests
                 Group = "GroupName 03.12.2021 18:06:39",
                 Photo = "C:\\fakepath\\95384925.jpg"
             };
-            AddressData oldaddress = new AddressData("a")
+            AddressData oldaddress = new AddressData("a", "b")
             {
                 MiddleName = "MiddleName2 " + DateTime.Now,
-                LastName = "b",
                 NickName = "nickname2 " + DateTime.Now
             };
             if (!app.Groups.IsElementPresent(By.Name("selected[]")))
             {
                 app.Address.CreateAddress(address);
             }
-            app.Address.ModifyAddress(address);
-             
 
+
+            List<AddressData> oldAddress = app.Address.GetAddressList();
+            app.Address.ModifyAddress(address);
+            List<AddressData> newAddress = app.Address.GetAddressList();
+            oldAddress[0].FirstName=address.FirstName;
+            oldAddress[0].LastName = address.LastName;
+            oldAddress.Sort();
+            newAddress.Sort();
+            Assert.AreEqual(oldAddress, newAddress);
         }
     }
 }

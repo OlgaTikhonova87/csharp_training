@@ -11,7 +11,7 @@ namespace WebAddressbookTests
         public void GroupModification()
         {
             GroupData oldData = new GroupData("OldGroupName");
-
+            GroupData group = new GroupData("Group_1");
             GroupData newData = new GroupData("ChangedGroupName");
             newData.GroupHeader = "header is changed";
             newData.GroupFooter = "footer is changed";
@@ -22,12 +22,13 @@ namespace WebAddressbookTests
             }
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Modify(newData,0);
-
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups[0].GroupName = newData.GroupName;
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+
+
         }
     }
 }

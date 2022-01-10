@@ -10,7 +10,7 @@ namespace WebAddressbookTests
         [Test]
         public void GroupCreationTest()
         {
-            GroupData group = new GroupData("GroupName " + DateTime.Now);
+            GroupData group = new GroupData("GroupName_2");
             group.GroupHeader = "GroupHeader " + DateTime.Now;
             group.GroupFooter = "GroupFooter " + DateTime.Now;
 

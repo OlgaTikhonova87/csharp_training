@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
@@ -27,6 +28,25 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public List<AddressData> GetAddressList()
+        {
+            OpenAddressBook();
+            List<AddressData> address = new List<AddressData>();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name='entry']")); // еще подумать  td:nth-child(3) > tr[name='entry']
+            //ICollection<IWebElement> elementsFirstName = driver.FindElements(By.CssSelector("td:nth-child(3)")); // еще подумать  td:nth-child(3) > tr[name='entry']
+           // ICollection<IWebElement> elementsLastName = driver.FindElements(By.CssSelector("td:nth-child(2)"));
+            foreach (IWebElement element in elements)
+            {
+                IWebElement First = element.FindElement(By.CssSelector("td:nth-child(3)"));
+                IWebElement Last = element.FindElement(By.CssSelector("td:nth-child(2)"));
+
+                address.Add(new AddressData(First.Text, Last.Text));
+
+            }
+
+            return address;
+        }
+
         public bAddressHelper InitCreation()
         {
             driver.FindElement(By.LinkText("add new")).Click();
@@ -47,7 +67,7 @@ namespace WebAddressbookTests
         }
         public bAddressHelper SubmitAddressModification()
         {
-            driver.FindElement(By.XPath("/html/body/div/div[4]/form/input[21]")).Click();
+            driver.FindElement(By.Name("update")).Click();
             return this;
         }
         //REMOVE
