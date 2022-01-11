@@ -37,292 +37,33 @@ namespace WebAddressbookTests
             this.lastname = lastname;
         }
 
-        public string FirstName
-        {
-            set
-            {
-                firstname = value;
-            }
-            get
-            {
-                return firstname;
-            }
-        }
-        public string MiddleName
-        {
-            set
-            {
-                middlename = value;
-            }
-            get
-            {
-                return middlename;
-            }
-        }
-        public string LastName
-        {
-            set
-            {
-                lastname = value;
-            }
-            get
-            {
-                return lastname;
-            }
-        }
-        public string NickName
-        {
-            set
-            {
-                nickname = value;
-            }
-            get
-            {
-                return nickname;
-            }
-        }
-        public string Title
-        {
-            set
-            {
-                title = value;
-            }
-            get
-            {
-                return title;
-            }
-        }
-        public string Company
-        {
-            set
-            {
-                company = value;
-            }
-            get
-            {
-                return company;
-            }
-        }
-        public string Address
-        {
-            set
-            {
-                address = value;
-            }
-            get
-            {
-                return address;
-            }
-        }
-        public string HomePhone
-        {
-            set
-            {
-                homephone = value;
-            }
-            get
-            {
-                return homephone;
-            }
-        }
-        public string MobilePhone
-        {
-            set
-            {
-                mobilephone = value;
-            }
-            get
-            {
-                return mobilephone;
-            }
-        }
-        public string WorkPhone
-        {
-            set
-            {
-                workphone = value;
-            }
-            get
-            {
-                return workphone;
-            }
-        }
-        public string Fax
-        {
-            set
-            {
-                fax = value;
-            }
-            get
-            {
-                return fax;
-            }
-        }
-        public string Mail1
-        {
-            set
-            {
-                mail1 = value;
-            }
-            get
-            {
-                return mail1;
-            }
-        }
-        public string Mail2
-        {
-            set
-            {
-                mail2 = value;
-            }
-            get
-            {
-                return mail2;
-            }
-        }
-        public string Mail3
-        {
-            set
-            {
-                mail3 = value;
-            }
-            get
-            {
-                return mail3;
-            }
-        }
-        public string HomePage
-        {
-            set
-            {
-                homepage = value;
-            }
-            get
-            {
-                return homepage;
-            }
-        }
-        public string Notes
-        {
-            set
-            {
-                notes = value;
-            }
-            get
-            {
-                return notes;
-            }
-        }
-        public string Phone2
-        {
-            set
-            {
-                phone2 = value;
-            }
-            get
-            {
-                return phone2;
-            }
-        }
-        public string Address2
-        {
-            set
-            {
-                address2 = value;
-            }
-            get
-            {
-                return address2;
-            }
-        }
-        public string BDay
-        {
-            set
-            {
-                bday = value;
-            }
-            get
-            {
-                return bday;
-            }
-        }
-        public string BMonth
-        {
-            set
-            {
-                bmonth = value;
-            }
-            get
-            {
-                return bmonth;
-            }
-        }
-        public string BYear
-        {
-            set
-            {
-                byear = value;
-            }
-            get
-            {
-                return byear;
-            }
-        }
-        public string ADay
-        {
-            set
-            {
-                aday = value;
-            }
-            get
-            {
-                return aday;
-            }
-        }
-        public string AMonth
-        {
-            set
-            {
-                amonth = value;
-            }
-            get
-            {
-                return amonth;
-            }
-        }
-        public string AYear
-        {
-            set
-            {
-                ayear = value;
-            }
-            get
-            {
-                return ayear;
-            }
-        }
-        public string Group
-        {
-            set
-            {
-                group = value;
-            }
-            get
-            {
-                return group;
-            }
-        }
-        public string Photo
-        {
-            set
-            {
-                photo = value;
-            }
-            get
-            {
-                return photo;
-            }
-        }
+        public string FirstName { get; set; }
+
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public string NickName { get; set; }
+        public string Title { get; set; }
+        public string Company { get; set; }
+        public string Address { get; set; }
+        public string HomePhone { get; set; }
+        public string MobilePhone { get; set; }
+        public string WorkPhone { get; set; }
+        public string Fax { get; set; }
+        public string Mail1 { get; set; }
+        public string Mail2 { get; set; }
+        public string Mail3 { get; set; }
+        public string HomePage { get; set; }
+        public string Notes { get; set; }
+        public string Phone2 { get; set; }
+        public string Address2 { get; set; }
+        public string BDay { get; set; }
+        public string BMonth { get; set; }
+        public string BYear { get; set; }
+        public string ADay { get; set; }
+        public string AMonth { get; set; }
+        public string AYear { get; set; }
+        public string Group { get; set; }
+        public string Photo { get; set; }
 
 
         public int CompareTo(AddressData other)

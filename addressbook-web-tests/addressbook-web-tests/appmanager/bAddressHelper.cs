@@ -28,8 +28,19 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public int GetAddressCount()
+        {
+            return driver.FindElements(By.CssSelector("tr[name='entry']")).Count;
+        }
+
+        private List<AddressData> addressCache = null;
         public List<AddressData> GetAddressList()
         {
+            if (addressCache == null)
+            {
+                addressCache = new List<AddressData>();
+            }
+
             OpenAddressBook();
             List<AddressData> address = new List<AddressData>();
             ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name='entry']")); // еще подумать  td:nth-child(3) > tr[name='entry']
@@ -40,16 +51,17 @@ namespace WebAddressbookTests
                 IWebElement First = element.FindElement(By.CssSelector("td:nth-child(3)"));
                 IWebElement Last = element.FindElement(By.CssSelector("td:nth-child(2)"));
 
-                address.Add(new AddressData(First.Text, Last.Text));
+                addressCache.Add(new AddressData(First.Text, Last.Text));
 
             }
 
-            return address;
+            return new List<AddressData>(addressCache); 
         }
 
         public bAddressHelper InitCreation()
         {
             driver.FindElement(By.LinkText("add new")).Click();
+            addressCache = null;
             return this;
         }
         //MODIFICATION
@@ -68,6 +80,7 @@ namespace WebAddressbookTests
         public bAddressHelper SubmitAddressModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            addressCache = null;
             return this;
         }
         //REMOVE
@@ -77,6 +90,7 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("selected[]")).Click();
 
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            addressCache = null;
             driver.SwitchTo().Alert().Accept();
             return this;
         }

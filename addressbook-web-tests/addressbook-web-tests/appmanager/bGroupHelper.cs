@@ -45,6 +45,12 @@ namespace WebAddressbookTests
             manager.Navigator.GoToGroupsPage();
             return this;
         }
+
+        public int GetGroupCount()
+        {
+           return driver.FindElements(By.CssSelector("span.group")).Count;
+        }
+
         public bGroupHelper InitGroupModification()
         {
             driver.FindElement(By.Name("edit")).Click();
@@ -53,6 +59,7 @@ namespace WebAddressbookTests
         public bGroupHelper SubmitGroupModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            groupCache = null;
             return this;
         }
  
@@ -68,6 +75,7 @@ namespace WebAddressbookTests
         public bGroupHelper Removal()
         {
             driver.FindElement(By.Name("delete")).Click();
+            groupCache = null;
             return this;
         }
 
@@ -75,11 +83,13 @@ namespace WebAddressbookTests
         public bGroupHelper SelectGroup(int index)
         {
             driver.FindElement(By.Name("selected[]")).Click();
+
             return this;
         }
         public bGroupHelper Submit()
         {
             driver.FindElement(By.Name("submit")).Click();
+            groupCache = null;
             return this;
         }
         public bGroupHelper FillGroupForm(GroupData groupdata)
@@ -93,17 +103,23 @@ namespace WebAddressbookTests
         {
             return driver.FindElement(By.XPath("//input[@name='selected[]']")).Text == groupname;
         }
+        private List<GroupData> groupCache = null;
         public List<GroupData> GetGroupList()
         {
+            if (groupCache == null)
+            {
+                groupCache = new List<GroupData>();
+            }
             List<GroupData> groups = new List<GroupData>();
             manager.Navigator.GoToGroupsPage();
            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
             foreach (IWebElement element in elements)
             {
-                groups.Add(new GroupData(element.Text));
+                            
+                groupCache.Add(new GroupData(element.Text) {ID = element.FindElement(By.TagName("input")).GetAttribute("value") });
             }
 
-            return groups;
+            return new List < GroupData >(groupCache);
         }
     }
 }

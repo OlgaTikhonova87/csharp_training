@@ -50,6 +50,7 @@ namespace WebAddressbookTests
 
             List<AddressData> oldAddress = app.Address.GetAddressList();
             app.Address.ModifyAddress(address);
+            Assert.AreEqual(oldAddress.Count, app.Address.GetAddressCount());
             List<AddressData> newAddress = app.Address.GetAddressList();
             oldAddress[0].FirstName=address.FirstName;
             oldAddress[0].LastName = address.LastName;

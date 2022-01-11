@@ -40,6 +40,7 @@ namespace WebAddressbookTests
 
             List<AddressData> oldAddress = app.Address.GetAddressList();
             app.Address.CreateAddress(address);
+            Assert.AreEqual(oldAddress.Count + 1, app.Address.GetAddressCount());
             List<AddressData> newAddress = app.Address.GetAddressList();
             oldAddress.Add(address);
             oldAddress.Sort();

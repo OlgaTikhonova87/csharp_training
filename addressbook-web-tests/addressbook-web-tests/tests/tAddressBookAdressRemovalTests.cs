@@ -20,6 +20,7 @@ namespace WebAddressbookTests
             }
             List<AddressData> oldAddress = app.Address.GetAddressList();
             app.Address.RemoveAddress();
+            Assert.AreEqual(oldAddress.Count - 1, app.Address.GetAddressCount());
             List<AddressData> newAddress = app.Address.GetAddressList();
             oldAddress.RemoveAt(0);
             oldAddress.Sort();
