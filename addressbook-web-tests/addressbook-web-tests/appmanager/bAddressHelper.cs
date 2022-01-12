@@ -11,7 +11,6 @@ namespace WebAddressbookTests
          {
 
          }
-
         //CREATION
         public bAddressHelper CreateAddress(AddressData address)
         {
@@ -21,43 +20,6 @@ namespace WebAddressbookTests
             OpenAddressBook();
             return this;
         }
-
-        public bAddressHelper OpenAddressBook()
-        {
-            driver.FindElement(By.XPath("/html/body/div/div[2]/a/img")).Click();
-            return this;
-        }
-
-        public int GetAddressCount()
-        {
-            return driver.FindElements(By.CssSelector("tr[name='entry']")).Count;
-        }
-
-        private List<AddressData> addressCache = null;
-        public List<AddressData> GetAddressList()
-        {
-            if (addressCache == null)
-            {
-                addressCache = new List<AddressData>();
-            }
-
-            OpenAddressBook();
-            List<AddressData> address = new List<AddressData>();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name='entry']")); // еще подумать  td:nth-child(3) > tr[name='entry']
-            //ICollection<IWebElement> elementsFirstName = driver.FindElements(By.CssSelector("td:nth-child(3)")); // еще подумать  td:nth-child(3) > tr[name='entry']
-           // ICollection<IWebElement> elementsLastName = driver.FindElements(By.CssSelector("td:nth-child(2)"));
-            foreach (IWebElement element in elements)
-            {
-                IWebElement First = element.FindElement(By.CssSelector("td:nth-child(3)"));
-                IWebElement Last = element.FindElement(By.CssSelector("td:nth-child(2)"));
-
-                addressCache.Add(new AddressData(First.Text, Last.Text));
-
-            }
-
-            return new List<AddressData>(addressCache); 
-        }
-
         public bAddressHelper InitCreation()
         {
             driver.FindElement(By.LinkText("add new")).Click();
@@ -70,6 +32,7 @@ namespace WebAddressbookTests
             AddressModificationInitiation();
             FillAddressForm(address);
             SubmitAddressModification();
+            OpenAddressBook();
             return this;
         }
         public bAddressHelper AddressModificationInitiation()
@@ -88,10 +51,10 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.XPath("/html/body/div/div[2]/a/img")).Click();
             driver.FindElement(By.Name("selected[]")).Click();
-
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             addressCache = null;
             driver.SwitchTo().Alert().Accept();
+            OpenAddressBook();
             return this;
         }
 
@@ -99,29 +62,29 @@ namespace WebAddressbookTests
         public bAddressHelper FillAddressForm(AddressData address)
         {
             //Fill address form
-            Type(By.Name("firstname"), address.firstname);
-            Type(By.Name("middlename"), address.middlename);
-            Type(By.Name("lastname"), address.lastname);
-            Type(By.Name("nickname"), address.nickname);
+            Type(By.Name("firstname"), address.FirstName);
+            Type(By.Name("middlename"), address.MiddleName);
+            Type(By.Name("lastname"), address.LastName);
+            Type(By.Name("nickname"), address.NickName);
 
-            Type(By.Name("title"), address.title);
-            Type(By.Name("company"), address.company);
-            Type(By.Name("address"), address.address);
+            Type(By.Name("title"), address.Title);
+            Type(By.Name("company"), address.Company);
+            Type(By.Name("address"), address.Address);
 
-            Type(By.Name("mobile"), address.mobilephone);
-            Type(By.Name("work"), address.workphone);
-            Type(By.Name("fax"), address.fax);
+            Type(By.Name("mobile"), address.MobilePhone);
+            Type(By.Name("work"), address.WorkPhone);
+            Type(By.Name("fax"), address.Fax);
 
-            Type(By.Name("email"), address.mail1);
-            Type(By.Name("email2"), address.mail2);
-            Type(By.Name("email3"), address.mail3);
+            Type(By.Name("email"), address.Mail1);
+            Type(By.Name("email2"), address.Mail2);
+            Type(By.Name("email3"), address.Mail3);
 
-            Type(By.Name("homepage"), address.homepage);
-            Type(By.Name("address2"), address.address2);
-            Type(By.Name("phone2"), address.phone2);
-            Type(By.Name("notes"), address.notes);
-            Type(By.Name("byear"), address.byear);
-            Type(By.Name("ayear"), address.ayear);
+            Type(By.Name("homepage"), address.HomePage);
+            Type(By.Name("address2"), address.Address2);
+            Type(By.Name("phone2"), address.Phone2);
+            Type(By.Name("notes"), address.Notes);
+            Type(By.Name("byear"), address.BYear);
+            Type(By.Name("ayear"), address.AYear);
 
             return this;
         }
@@ -130,6 +93,38 @@ namespace WebAddressbookTests
             string gg;
             gg = driver.FindElement(By.Name("selected[]")).GetAttribute("title");
             return driver.FindElement(By.Name("selected[]")).GetAttribute("title") == "Select ("+lastname+" "+ firstname+")";
+        }
+        public bAddressHelper OpenAddressBook()
+        {
+            driver.FindElement(By.XPath("/html/body/div/div[2]/a/img")).Click();
+            return this;
+        }
+
+        public int GetAddressCount()
+        {
+            int i = driver.FindElements(By.CssSelector("tr[name='entry']")).Count;
+            return i;
+        }
+
+        private List<AddressData> addressCache = null;
+        public List<AddressData> GetAddressList()
+        {
+            if (addressCache == null)
+            {
+                addressCache = new List<AddressData>();
+                OpenAddressBook();
+                List<AddressData> address = new List<AddressData>();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name='entry']"));
+
+                foreach (IWebElement element in elements)
+                {
+                    IWebElement First = element.FindElement(By.CssSelector("td:nth-child(3)"));
+                    IWebElement Last = element.FindElement(By.CssSelector("td:nth-child(2)"));
+
+                    addressCache.Add(new AddressData(First.Text, Last.Text));
+                }
+            }
+            return new List<AddressData>(addressCache);
         }
     }
 }

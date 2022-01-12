@@ -33,8 +33,8 @@ namespace WebAddressbookTests
 
         public AddressData(string firstname, string lastname) 
         {
-            this.firstname= firstname;
-            this.lastname = lastname;
+            this.FirstName = firstname;
+            this.LastName = lastname;
         }
 
         public string FirstName { get; set; }
@@ -86,7 +86,7 @@ namespace WebAddressbookTests
             {
                 return true;
             }
-            return FirstName == other.FirstName && lastname == other.lastname;
+            return FirstName == other.FirstName && LastName == other.LastName;
         }
     }
 }
