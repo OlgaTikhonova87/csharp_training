@@ -11,6 +11,47 @@ namespace WebAddressbookTests
          {
 
          }
+
+        public AddressData GetContractInformationFromTable(int index)
+        {
+            manager.Navigator.OpenHomePage();
+           IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"));
+            string lastName = cells[1].Text;
+            string firstName = cells[2].Text;
+            string address = cells[3].Text;
+            string allPhones = cells[5].Text;
+            return new AddressData(firstName, lastName)
+            {
+                Address = address,
+                AllPhones = allPhones
+            };
+
+        }
+
+        public AddressData GetContractInformationFromForm(int index)
+        {
+            manager.Navigator.OpenHomePage();
+            AddressModificationInitiation(index);
+
+            string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
+            string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
+            string address = driver.FindElement(By.Name("address")).GetAttribute("value");
+
+            string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
+            string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
+            string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+
+            return new AddressData(firstName, lastName)
+            {
+                Address = address,
+                HomePhone = homePhone,
+                MobilePhone = mobilePhone,
+                WorkPhone = workPhone
+            };
+
+        }
+
         //CREATION
         public bAddressHelper CreateAddress(AddressData address)
         {
@@ -29,15 +70,19 @@ namespace WebAddressbookTests
         //MODIFICATION
         public bAddressHelper ModifyAddress(AddressData address)
         {
-            AddressModificationInitiation();
+            AddressModificationInitiation(1);
             FillAddressForm(address);
             SubmitAddressModification();
             OpenAddressBook();
             return this;
         }
-        public bAddressHelper AddressModificationInitiation()
+        public bAddressHelper AddressModificationInitiation(int index)
         {
-            driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[7]
+                .FindElement(By.TagName("a")).Click();
+            //driver.FindElements(By.Name("entry"))[index]
+            //                .FindElements(By.TagName("td"));
             return this;
         }
         public bAddressHelper SubmitAddressModification()

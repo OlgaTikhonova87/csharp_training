@@ -30,6 +30,7 @@ namespace WebAddressbookTests
         public string ayear = "";
         public string group = "";
         public string photo = "";
+        private string allPhones;
 
         public AddressData(string firstname, string lastname) 
         {
@@ -65,12 +66,47 @@ namespace WebAddressbookTests
         public string Group { get; set; }
         public string Photo { get; set; }
 
+        public string AllPhones {
+            get
+            { 
+            if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone)).Trim();
+                }
+            }
+            set 
+            {
+                allPhones = value;
+            }
+        }
+
+        private string CleanUp(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return ""; 
+            }
+            return phone.Replace(" ", "").Replace("-","").Replace(")","").Replace("(","")+"\r\n";
+        }
 
         public int CompareTo(AddressData other)
         {
             if (object.ReferenceEquals(null, other))
             {
                 return 1;
+            }
+            if (this.FirstName != other.FirstName)
+            {
+                return FirstName.CompareTo(other.FirstName);
+            }
+            else
+            if (this.LastName != other.LastName)
+            {
+                return LastName.CompareTo(other.LastName);
             }
 
             return FirstName.CompareTo(other.FirstName) & LastName.CompareTo(other.LastName);
