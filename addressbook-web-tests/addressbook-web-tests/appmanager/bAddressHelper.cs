@@ -26,7 +26,6 @@ namespace WebAddressbookTests
                 Address = address,
                 AllPhones = allPhones
             };
-
         }
 
         public AddressData GetContractInformationFromForm(int index)
@@ -57,14 +56,14 @@ namespace WebAddressbookTests
         {
             InitCreation();
             FillAddressForm(address);
-            manager.Groups.Submit();
+            Enter();
             OpenAddressBook();
             return this;
         }
         public bAddressHelper InitCreation()
         {
             driver.FindElement(By.LinkText("add new")).Click();
-            addressCache = null;
+         //   addressCache = null;
             return this;
         }
         //MODIFICATION
@@ -94,7 +93,7 @@ namespace WebAddressbookTests
         //REMOVE
         public bAddressHelper RemoveAddress()
         {
-            driver.FindElement(By.XPath("/html/body/div/div[2]/a/img")).Click();
+           // driver.FindElement(By.XPath("/html/body/div/div[2]/a/img")).Click();
             driver.FindElement(By.Name("selected[]")).Click();
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             addressCache = null;
@@ -104,6 +103,12 @@ namespace WebAddressbookTests
         }
 
         //ADDITIONAL
+        public bAddressHelper Enter()
+        {
+            driver.FindElement(By.Name("submit")).Click();
+            addressCache = null;
+            return this;
+        }
         public bAddressHelper FillAddressForm(AddressData address)
         {
             //Fill address form

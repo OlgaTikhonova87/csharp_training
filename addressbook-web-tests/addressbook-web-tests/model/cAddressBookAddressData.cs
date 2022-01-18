@@ -109,7 +109,7 @@ namespace WebAddressbookTests
                 return LastName.CompareTo(other.LastName);
             }
 
-            return FirstName.CompareTo(other.FirstName) & LastName.CompareTo(other.LastName);
+            return 0;
         }
 
         public bool Equals(AddressData other)
@@ -123,6 +123,14 @@ namespace WebAddressbookTests
                 return true;
             }
             return FirstName == other.FirstName && LastName == other.LastName;
+        }
+        public override int GetHashCode()
+        {
+            return 0;
+        }
+        public override string ToString()
+        {
+            return "name=" + FirstName + " " + LastName;
         }
     }
 }

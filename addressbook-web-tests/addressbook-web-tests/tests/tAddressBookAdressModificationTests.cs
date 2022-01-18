@@ -52,8 +52,8 @@ namespace WebAddressbookTests
             app.Address.ModifyAddress(address);
             Assert.AreEqual(oldAddress.Count, app.Address.GetAddressCount());
             List<AddressData> newAddress = app.Address.GetAddressList();
-            oldAddress[0].FirstName = address.FirstName;
-            oldAddress[0].LastName = address.LastName;
+            oldAddress[1].FirstName = address.FirstName;
+            oldAddress[1].LastName = address.LastName;
             oldAddress.Sort();
             newAddress.Sort();
             Assert.AreEqual(oldAddress, newAddress);
