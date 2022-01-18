@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace WebAddressbookTests
 {
@@ -175,6 +176,13 @@ namespace WebAddressbookTests
                 }
             }
             return new List<AddressData>(addressCache);
+        }
+        public int GetNumberOfSearchResults()
+        {
+            manager.Navigator.OpenHomePage();
+            string text = driver.FindElement(By.TagName("label")).Text;
+            Match m = new Regex(@"\d+").Match(text);
+            return Int32.Parse(m.Value);
         }
     }
 }

@@ -90,6 +90,7 @@
     <Compile Include="figures\tFigureTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tests\tAddressBookGroupCreationTests.cs" />
+    <Compile Include="tests\tAddressBookNumberOfSearchResults.cs" />
     <Compile Include="tests\tContactInformationTests.cs" />
   </ItemGroup>
   <ItemGroup>

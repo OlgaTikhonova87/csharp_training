@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 namespace WebAddressbookTests
 {
   public class AddressData : IEquatable<AddressData>, IComparable<AddressData>
@@ -75,6 +76,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
+                   
                     return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone)).Trim();
                 }
             }
@@ -90,7 +92,7 @@ namespace WebAddressbookTests
             {
                 return ""; 
             }
-            return phone.Replace(" ", "").Replace("-","").Replace(")","").Replace("(","")+"\r\n";
+            return Regex.Replace(phone, "[ -()]", "") + "\r\n";
         }
 
         public int CompareTo(AddressData other)
