@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+
 namespace WebAddressbookTests
 {
   public class AddressData : IEquatable<AddressData>, IComparable<AddressData>
     {
         
         public string firstname;
-        public string middlename;
+        public string middlename = "";
         public string lastname = "";
         public string nickname = "";
         public string title = "";
@@ -32,6 +33,8 @@ namespace WebAddressbookTests
         public string group = "";
         public string photo = "";
         private string allPhones;
+        private string allInformation;
+        private string allMails;
 
         public AddressData(string firstname, string lastname) 
         {
@@ -66,6 +69,7 @@ namespace WebAddressbookTests
         public string AYear { get; set; }
         public string Group { get; set; }
         public string Photo { get; set; }
+        public string Home { get; set; }
 
         public string AllPhones {
             get
@@ -76,8 +80,9 @@ namespace WebAddressbookTests
                 }
                 else
                 {
+
+                    return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone) + CleanUp(Phone2)).Trim();
                    
-                    return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone)).Trim();
                 }
             }
             set 
@@ -85,14 +90,81 @@ namespace WebAddressbookTests
                 allPhones = value;
             }
         }
+        public string AllMails
+        {
+            get
+            {
+                if (allMails != null)
+                {
+                    return allMails;
+                }
+                else
+                {
+                    return (AddSequenses(Mail1) + AddSequenses(Mail2) + AddSequenses(Mail3)).Trim();
 
+                }
+            }
+            set
+            {
+                allMails = value;
+            }
+        }
+        public string AllInformation
+        {
+            get
+            {
+                if (allInformation != null)
+                {
+                    return allInformation;
+                }
+                else
+                {
+                   // NickName = (NickName == null) ? "" : (NickName) + "\r\n";
+
+                    allInformation = ((FirstName) + " "
+                        + (MiddleName) + " "
+                        + (LastName) + "\r\n"
+                        + (NickName) + "\r\n"
+                        + (Title) + "\r\n"
+                        + (Company) + "\r\n"
+                        + (Address) + "\r\n" + "\r\n"
+                        + "H: " + (HomePhone) + "\r\n"
+                        + "M: " + (MobilePhone) + "\r\n"
+                        + "W: " + (WorkPhone) + "\r\n"
+                        + "F: " + (Fax) + "\r\n" + "\r\n"
+                        + (Mail1) + "\r\n"
+                        + (Mail2) + "\r\n"
+                        + (Mail3) + "\r\n"
+                        + "Homepage:\r\n" + (HomePage) + "\r\n" + "\r\n" + "\r\n"
+                        + (Address2) + "\r\n" + "\r\n"
+                        + "P: " + (Phone2) + "\r\n" + "\r\n"
+                        + Notes //!= null ? Notes: ""
+               
+                        ).Trim();
+                    return allInformation;
+                        
+                }
+            }
+            set
+            {
+                allPhones = value;
+            }
+        }
         private string CleanUp(string phone)
         {
             if (phone == null || phone == "")
             {
                 return ""; 
             }
-            return Regex.Replace(phone, "[ -()]", "") + "\r\n";
+            return Regex.Replace(phone, "[ ()-]", "") + "\r\n";
+        }
+        private string AddSequenses(string inputstring)
+        {
+            if (inputstring == null || inputstring == "")
+            {
+                return "";
+            }
+            return inputstring + "\r\n";
         }
 
         public int CompareTo(AddressData other)

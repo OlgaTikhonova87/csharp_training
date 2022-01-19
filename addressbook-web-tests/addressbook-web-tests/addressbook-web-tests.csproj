@@ -91,7 +91,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="tests\tAddressBookGroupCreationTests.cs" />
     <Compile Include="tests\tAddressBookNumberOfSearchResults.cs" />
-    <Compile Include="tests\tContactInformationTests.cs" />
+    <Compile Include="tests\tAddressBookInformationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
