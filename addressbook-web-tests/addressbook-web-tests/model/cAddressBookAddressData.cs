@@ -113,8 +113,8 @@ namespace WebAddressbookTests
         {
             get
             {
-                return (FirstName  + " "
-                        + (MiddleName) 
+                return ((!string.IsNullOrEmpty(FirstName) ? $"{FirstName} " : string.Empty)
+                        + (!string.IsNullOrEmpty(MiddleName) ? $"{MiddleName} " : string.Empty)
                         + LastName
                         + NickName
                         + Title 
