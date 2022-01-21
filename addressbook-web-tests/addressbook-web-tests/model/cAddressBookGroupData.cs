@@ -38,7 +38,7 @@ namespace WebAddressbookTests
         }
         public override string ToString()
         {
-            return "name = " + GroupName;
+            return "name = " + GroupName+ "\nheader = " + GroupHeader +"\nfooter = " + GroupFooter;
         }
         public int CompareTo(GroupData other)
         {

@@ -5,15 +5,25 @@ using System.Collections.Generic;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupCreationTests: AuthTestBase
+    public class GroupCreationTests : AuthTestBase
     {
-        [Test]
-        public void GroupCreationTest()
+        public static IEnumerable<GroupData> RandomGroupProvider()
         {
-            GroupData group = new GroupData("GroupName_2");
-            group.GroupHeader = "GroupHeader " + DateTime.Now;
-            group.GroupFooter = "GroupFooter " + DateTime.Now;
+            List<GroupData> groups = new List<GroupData>();
+            for (int i = 0; i<5; i++)
+            {
+                groups.Add(new GroupData(GenerateRandomString(30))
+                {
+                    GroupHeader = GenerateRandomString(100),
+                    GroupFooter = GenerateRandomString(100),
+                });
+            }
+            return groups;
+        }
 
+        [Test, TestCaseSource("RandomGroupProvider")]
+        public void GroupCreationTest(GroupData group)
+        {
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Create(group);
             Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
@@ -22,24 +32,6 @@ namespace WebAddressbookTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
-        }
-        [Test]
-        public void EmptyGroupCreationTest()
-        {
-            GroupData group = new GroupData("");
-            group.GroupHeader = "";
-            group.GroupFooter = "";
-
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
-            app.Groups.Create(group);
-            Assert.AreEqual(oldGroups.Count+1, app.Groups.GetGroupCount());
-            List<GroupData> newGroups = app.Groups.GetGroupList();
-            oldGroups.Add(group);
-            oldGroups.Sort();
-            newGroups.Sort();
-            Assert.AreEqual(oldGroups, newGroups);
-
-
         }
     }
 }

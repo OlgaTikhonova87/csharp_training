@@ -42,7 +42,7 @@ namespace WebAddressbookTests
         private string GetDetailInformation()
         {
             string DetailText = driver.FindElement(By.XPath("//div[@id = 'content']")).Text;
-            return DetailText.Replace("\r\n", "");
+            return DetailText;
         }
 
         private bAddressHelper OpenDetails(int index)

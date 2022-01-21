@@ -115,22 +115,22 @@ namespace WebAddressbookTests
             {
                 return ((!string.IsNullOrEmpty(FirstName) ? $"{FirstName} " : string.Empty)
                         + (!string.IsNullOrEmpty(MiddleName) ? $"{MiddleName} " : string.Empty)
-                        + LastName
-                        + NickName
-                        + Title 
-                        + Company
-                        + Address
-                        + (!string.IsNullOrEmpty(HomePhone) ? $"H: {HomePhone}" : string.Empty)
-                        + (!string.IsNullOrEmpty(MobilePhone) ? $"M: {MobilePhone}" : string.Empty)
-                        + (!string.IsNullOrEmpty(WorkPhone) ? $"W: {WorkPhone}" : string.Empty)
-                        + (!string.IsNullOrEmpty(Fax) ? $"F: {Fax}" : string.Empty)
-                        + Mail1 
-                        + Mail2 
-                        + Mail3
-                        + (!string.IsNullOrEmpty(HomePage) ? $"F: {HomePage}" : string.Empty)
-                        + Address2
-                        + (!string.IsNullOrEmpty(Phone2) ? $"P: {Phone2}" : string.Empty)
-                        + Notes).Trim().Replace("\r\n", "");
+                        + (!string.IsNullOrEmpty(LastName) ? $"{LastName}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(NickName) ? $"{NickName}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(Title) ? $"{Title}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(Company) ? $"{Company}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(Address) ? $"{Address}\r\n\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(HomePhone) ? $"H: {HomePhone}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(MobilePhone) ? $"M: {MobilePhone}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(WorkPhone) ? $"W: {WorkPhone}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(Fax) ? $"F: {Fax}\r\n\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(Mail1) ? $"{Mail1}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(Mail2) ? $"{Mail2}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(Mail3) ? $"{Mail3}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(HomePage) ? $"Homepage:\r\n{HomePage}\r\n\r\n\r\n" : string.Empty)
+                        +(!string.IsNullOrEmpty(Address2) ? $"{Address2}\r\n\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(Phone2) ? $"P: {Phone2}\r\n\r\n" : string.Empty)
+                        + Notes).Trim();
             }
             set
             {
