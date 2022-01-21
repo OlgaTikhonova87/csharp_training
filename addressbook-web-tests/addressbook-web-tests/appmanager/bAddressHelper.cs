@@ -3,6 +3,7 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Runtime;
 
 namespace WebAddressbookTests
 {
@@ -12,7 +13,6 @@ namespace WebAddressbookTests
          {
 
          }
-
         public AddressData GetContractInformationFromTable(int index)
         {
             manager.Navigator.OpenHomePage();
@@ -32,7 +32,6 @@ namespace WebAddressbookTests
             return test;
 
         }
-
         public string GetContractInformationFromDetails(int index)
         {
             manager.Navigator.OpenHomePage();
@@ -43,7 +42,7 @@ namespace WebAddressbookTests
         private string GetDetailInformation()
         {
             string DetailText = driver.FindElement(By.XPath("//div[@id = 'content']")).Text;
-            return DetailText;
+            return DetailText.Replace("\r\n", "");
         }
 
         private bAddressHelper OpenDetails(int index)
@@ -52,9 +51,7 @@ namespace WebAddressbookTests
             .FindElements(By.TagName("td"))[6]
             .FindElement(By.TagName("a")).Click();
             return this;
-
         }
-
         public AddressData GetContractInformationFromForm(int index)
         {
             manager.Navigator.OpenHomePage();
@@ -100,6 +97,7 @@ namespace WebAddressbookTests
                 Address2 = address2,
                 Notes = notes
             };
+           
 
             return addre;
         }
@@ -133,8 +131,6 @@ namespace WebAddressbookTests
             driver.FindElements(By.Name("entry"))[index]
                 .FindElements(By.TagName("td"))[7]
                 .FindElement(By.TagName("a")).Click();
-            //driver.FindElements(By.Name("entry"))[index]
-            //                .FindElements(By.TagName("td"));
             return this;
         }
         public bAddressHelper SubmitAddressModification()
@@ -146,7 +142,6 @@ namespace WebAddressbookTests
         //REMOVE
         public bAddressHelper RemoveAddress()
         {
-           // driver.FindElement(By.XPath("/html/body/div/div[2]/a/img")).Click();
             driver.FindElement(By.Name("selected[]")).Click();
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             addressCache = null;
@@ -193,8 +188,7 @@ namespace WebAddressbookTests
         }
         public bool IsAddressExist(string lastname, string firstname)
         {
-            string gg;
-            gg = driver.FindElement(By.Name("selected[]")).GetAttribute("title");
+          //  string gg = driver.FindElement(By.Name("selected[]")).GetAttribute("title");
             return driver.FindElement(By.Name("selected[]")).GetAttribute("title") == "Select ("+lastname+" "+ firstname+")";
         }
         public bAddressHelper OpenAddressBook()
@@ -216,7 +210,7 @@ namespace WebAddressbookTests
             {
                 addressCache = new List<AddressData>();
                 OpenAddressBook();
-                List<AddressData> address = new List<AddressData>();
+               // List<AddressData> address = new List<AddressData>();
                 ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name='entry']"));
 
                 foreach (IWebElement element in elements)

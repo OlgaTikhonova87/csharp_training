@@ -5,7 +5,7 @@ namespace WebAddressbookTests
 {
   public class AddressData : IEquatable<AddressData>, IComparable<AddressData>
     {
-        
+
         public string firstname;
         public string middlename = "";
         public string lastname = "";
@@ -32,14 +32,14 @@ namespace WebAddressbookTests
         public string ayear = "";
         public string group = "";
         public string photo = "";
-        private string allPhones;
-        private string allInformation;
-        private string allMails;
+        public string allPhones;
+        public string allInformation;
+        public string allMails;
 
         public AddressData(string firstname, string lastname) 
         {
-            this.FirstName = firstname;
-            this.LastName = lastname;
+            FirstName = firstname;
+            LastName = lastname;
         }
 
         public string FirstName { get; set; }
@@ -113,41 +113,28 @@ namespace WebAddressbookTests
         {
             get
             {
-                if (allInformation != null)
-                {
-                    return allInformation;
-                }
-                else
-                {
-                   // NickName = (NickName == null) ? "" : (NickName) + "\r\n";
-
-                    allInformation = ((FirstName) + " "
-                        + (MiddleName) + " "
-                        + (LastName) + "\r\n"
-                        + (NickName) + "\r\n"
-                        + (Title) + "\r\n"
-                        + (Company) + "\r\n"
-                        + (Address) + "\r\n" + "\r\n"
-                        + "H: " + (HomePhone) + "\r\n"
-                        + "M: " + (MobilePhone) + "\r\n"
-                        + "W: " + (WorkPhone) + "\r\n"
-                        + "F: " + (Fax) + "\r\n" + "\r\n"
-                        + (Mail1) + "\r\n"
-                        + (Mail2) + "\r\n"
-                        + (Mail3) + "\r\n"
-                        + "Homepage:\r\n" + (HomePage) + "\r\n" + "\r\n" + "\r\n"
-                        + (Address2) + "\r\n" + "\r\n"
-                        + "P: " + (Phone2) + "\r\n" + "\r\n"
-                        + Notes //!= null ? Notes: ""
-               
-                        ).Trim();
-                    return allInformation;
-                        
-                }
+                return (FirstName  + " "
+                        + (MiddleName) 
+                        + LastName
+                        + NickName
+                        + Title 
+                        + Company
+                        + Address
+                        + (!string.IsNullOrEmpty(HomePhone) ? $"H: {HomePhone}" : string.Empty)
+                        + (!string.IsNullOrEmpty(MobilePhone) ? $"M: {MobilePhone}" : string.Empty)
+                        + (!string.IsNullOrEmpty(WorkPhone) ? $"W: {WorkPhone}" : string.Empty)
+                        + (!string.IsNullOrEmpty(Fax) ? $"F: {Fax}" : string.Empty)
+                        + Mail1 
+                        + Mail2 
+                        + Mail3
+                        + (!string.IsNullOrEmpty(HomePage) ? $"F: {HomePage}" : string.Empty)
+                        + Address2
+                        + (!string.IsNullOrEmpty(Phone2) ? $"P: {Phone2}" : string.Empty)
+                        + Notes).Trim().Replace("\r\n", "");
             }
             set
             {
-                allPhones = value;
+                allInformation = value;
             }
         }
         private string CleanUp(string phone)
@@ -158,6 +145,7 @@ namespace WebAddressbookTests
             }
             return Regex.Replace(phone, "[ ()-]", "") + "\r\n";
         }
+
         private string AddSequenses(string inputstring)
         {
             if (inputstring == null || inputstring == "")
@@ -166,7 +154,6 @@ namespace WebAddressbookTests
             }
             return inputstring + "\r\n";
         }
-
         public int CompareTo(AddressData other)
         {
             if (object.ReferenceEquals(null, other))

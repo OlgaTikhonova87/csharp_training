@@ -23,7 +23,8 @@ namespace WebAddressbookTests
         {
             AddressData fromEdit = app.Address.GetContractInformationFromForm(0);
             string fromDetails = app.Address.GetContractInformationFromDetails(0);
-            Assert.AreEqual(fromDetails, fromEdit.AllInformation);
+            string concatededitstring = fromEdit.AllInformation;
+            Assert.AreEqual(fromDetails, concatededitstring);
         }
     }
 }
