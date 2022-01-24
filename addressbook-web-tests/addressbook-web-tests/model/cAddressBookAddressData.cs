@@ -35,6 +35,12 @@ namespace WebAddressbookTests
         public string allPhones;
         public string allInformation;
         public string allMails;
+        public string allFio;
+        public string detmails ;
+        public string detgeneral ;
+        public string detphones ;
+
+
 
         public AddressData(string firstname, string lastname) 
         {
@@ -109,28 +115,105 @@ namespace WebAddressbookTests
                 allMails = value;
             }
         }
+        public string AllFIO
+        {
+            get
+            {
+                if (allFio != null)
+                {
+                    return allFio;
+                }
+                else
+                {
+                    return (!string.IsNullOrEmpty(FirstName) ? $"{FirstName}" : string.Empty)
+                        + (!string.IsNullOrEmpty(MiddleName) ? $" {MiddleName} " : " ")
+                        + (!string.IsNullOrEmpty(LastName) ? $"{LastName}" : string.Empty);
+
+                }
+            }
+            set
+            {
+                allFio = value;
+            }
+        }
+        public string DetGen
+        {
+            get
+            {
+                if (detgeneral != null)
+                {
+                    return detgeneral;
+                }
+                else
+                {
+                    return (!string.IsNullOrEmpty(NickName) ? $"{NickName}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(Title) ? $"{Title}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(Company) ? $"{Company}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(Address) ? $"{Address}\r\n" : string.Empty);
+;
+                }
+            }
+            set
+            {
+                detgeneral = value;
+            }
+        }
+        public string DetPhones
+        {
+            get
+            {
+                if (detphones != null)
+                {
+                    return detphones;
+                }
+                else
+                {
+                    return (!string.IsNullOrEmpty(HomePhone) ? $"H: {HomePhone}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(MobilePhone) ? $"M: {MobilePhone}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(WorkPhone) ? $"W: {WorkPhone}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(Fax) ? $"F: {Fax}\r\n" : string.Empty);
+
+                }
+            }
+            set
+            {
+                detphones = value;
+            }
+        }
+        public string DetMails
+        {
+            get
+            {
+                if (detmails != null)
+                {
+                    return detmails;
+                }
+                else
+                {
+                    return (!string.IsNullOrEmpty(Mail1) ? $"{Mail1}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(Mail2) ? $"{Mail2}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(Mail3) ? $"{Mail3}\r\n" : string.Empty)
+                        + (!string.IsNullOrEmpty(HomePage) ? $"Homepage:\r\n{HomePage}\r\n\r\n" : "\r\n");
+
+                }
+            }
+            set
+            {
+                detmails = value;
+            }
+        }
         public string AllInformation
         {
             get
             {
-                return ((!string.IsNullOrEmpty(FirstName) ? $"{FirstName} " : string.Empty)
-                        + (!string.IsNullOrEmpty(MiddleName) ? $"{MiddleName} " : string.Empty)
-                        + (!string.IsNullOrEmpty(LastName) ? $"{LastName}\r\n" : string.Empty)
-                        + (!string.IsNullOrEmpty(NickName) ? $"{NickName}\r\n" : string.Empty)
-                        + (!string.IsNullOrEmpty(Title) ? $"{Title}\r\n" : string.Empty)
-                        + (!string.IsNullOrEmpty(Company) ? $"{Company}\r\n" : string.Empty)
-                        + (!string.IsNullOrEmpty(Address) ? $"{Address}\r\n\r\n" : string.Empty)
-                        + (!string.IsNullOrEmpty(HomePhone) ? $"H: {HomePhone}\r\n" : string.Empty)
-                        + (!string.IsNullOrEmpty(MobilePhone) ? $"M: {MobilePhone}\r\n" : string.Empty)
-                        + (!string.IsNullOrEmpty(WorkPhone) ? $"W: {WorkPhone}\r\n" : string.Empty)
-                        + (!string.IsNullOrEmpty(Fax) ? $"F: {Fax}\r\n\r\n" : string.Empty)
-                        + (!string.IsNullOrEmpty(Mail1) ? $"{Mail1}\r\n" : string.Empty)
-                        + (!string.IsNullOrEmpty(Mail2) ? $"{Mail2}\r\n" : string.Empty)
-                        + (!string.IsNullOrEmpty(Mail3) ? $"{Mail3}\r\n" : string.Empty)
-                        + (!string.IsNullOrEmpty(HomePage) ? $"Homepage:\r\n{HomePage}\r\n\r\n\r\n" : string.Empty)
-                        +(!string.IsNullOrEmpty(Address2) ? $"{Address2}\r\n\r\n" : string.Empty)
-                        + (!string.IsNullOrEmpty(Phone2) ? $"P: {Phone2}\r\n\r\n" : string.Empty)
-                        + Notes).Trim();
+                return ((!string.IsNullOrEmpty(AllFIO) ? $"{AllFIO}" : string.Empty).Trim() + "\r\n"
+                    + (!string.IsNullOrEmpty(DetGen) ? $"{DetGen}\r\n" : string.Empty)
+                    + (!string.IsNullOrEmpty(DetPhones) ? $"{DetPhones}\r\n" : string.Empty)
+                    + (!string.IsNullOrEmpty(DetMails) ? $"{DetMails}\r\n" : string.Empty)
+                    + (!string.IsNullOrEmpty(Address2) ? $"{Address2}\r\n\r\n" : string.Empty)
+                    + (!string.IsNullOrEmpty(Phone2) ? $"P: {Phone2}\r\n\r\n" : string.Empty)
+                    + Notes).Trim();
+
             }
             set
             {
