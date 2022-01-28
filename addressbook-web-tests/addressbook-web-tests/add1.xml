@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAddressData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AddressData>
+    <FirstName>%==U9$P</FirstName>
+    <MiddleName>L=-X</MiddleName>
+    <LastName>a5",+</LastName>
+    <NickName>B</NickName>
+    <Address>+Y&gt;B_H(I</Address>
+    <HomePhone>,TH[</HomePhone>
+    <WorkPhone>,)CJ"</WorkPhone>
+    <Mail1>+;M\</Mail1>
+    <Mail2>-1&lt;S,</Mail2>
+    <Mail3>1=O!</Mail3>
+    <Phone2>6I#F&gt;)+=@R</Phone2>
+    <Address2 />
+    <AllPhones>,TH[
+,CJ"
+6I#F&gt;+=@R</AllPhones>
+    <AllMails>+;M\
+-1&lt;S,
+1=O!</AllMails>
+    <AllFIO>%==U9$P L=-X a5",+</AllFIO>
+    <DetGen>B
++Y&gt;B_H(I
+</DetGen>
+    <DetPhones>H: ,TH[
+W: ,)CJ"
+</DetPhones>
+    <DetMails>+;M\
+-1&lt;S,
+1=O!
+
+</DetMails>
+    <AllInformation>%==U9$P L=-X a5",+
+B
++Y&gt;B_H(I
+
+H: ,TH[
+W: ,)CJ"
+
++;M\
+-1&lt;S,
+1=O!
+
+
+P: 6I#F&gt;)+=@R</AllInformation>
+  </AddressData>
+  <AddressData>
+    <FirstName>/^</FirstName>
+    <MiddleName>'1M</MiddleName>
+    <LastName>R/)=</LastName>
+    <NickName />
+    <Address>=VT`!-</Address>
+    <HomePhone>Ma^99</HomePhone>
+    <WorkPhone>F/1*$74T.</WorkPhone>
+    <Mail1>-B_</Mail1>
+    <Mail2>0=</Mail2>
+    <Mail3>KM]W^)Y</Mail3>
+    <Phone2>6DC</Phone2>
+    <Address2>V&amp;00T)</Address2>
+    <AllPhones>Ma^99
+F/1*$74T.
+6DC</AllPhones>
+    <AllMails>-B_
+0=
+KM]W^)Y</AllMails>
+    <AllFIO>/^ '1M R/)=</AllFIO>
+    <DetGen>=VT`!-
+</DetGen>
+    <DetPhones>H: Ma^99
+W: F/1*$74T.
+</DetPhones>
+    <DetMails>-B_
+0=
+KM]W^)Y
+
+</DetMails>
+    <AllInformation>/^ '1M R/)=
+=VT`!-
+
+H: Ma^99
+W: F/1*$74T.
+
+-B_
+0=
+KM]W^)Y
+
+
+V&amp;00T)
+
+P: 6DC</AllInformation>
+  </AddressData>
+</ArrayOfAddressData>

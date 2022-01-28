@@ -1,6 +1,22 @@
 ﻿using System;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
+using Microsoft.CSharp;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using WebAddressbookTests;
+//using System.IO;
+//using System.Xml;
+//using System.Xml.Serialization;
+//using Newtonsoft.Json;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace WebAddressbookTests
 {
@@ -21,7 +37,63 @@ namespace WebAddressbookTests
             return groups;
         }
 
-        [Test, TestCaseSource("RandomGroupProvider")]
+public static IEnumerable<GroupData> GroupDataFromCsvFile()
+        {
+            List<GroupData> groups = new List<GroupData>();
+
+            string[] lines = File.ReadAllLines(@"groups.csv");
+            foreach (string l in lines)
+            {
+               string[] parts =  l.Split(',');
+                groups.Add(new GroupData(parts[0])
+                {
+                    GroupHeader = parts[1],
+                    GroupFooter = parts[2]
+                }
+                         );
+            }
+
+            return groups;
+        }
+        public static IEnumerable<GroupData> GroupDataFromXmlFile()
+        {
+            return (List<GroupData>)
+                new XmlSerializer(typeof(List<GroupData>))
+                .Deserialize(new StreamReader(@"groups.xml"));
+
+        }
+        public static IEnumerable<GroupData> GroupDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<GroupData>>
+                (File.ReadAllText(@"groups.json"));
+
+        }
+        public static IEnumerable<GroupData> GroupDataFromExcelFile()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            Excel.Application app = new Excel.Application();
+            app.Visible = true;
+            Excel.Workbook wb = app.Workbooks.Open(Path.Combine(Directory.GetCurrentDirectory(), @"groups.xlsx"));
+            Excel.Worksheet sheet = wb.ActiveSheet;
+            Excel.Range range = sheet.UsedRange;
+
+            for (int i = 1; i<= range.Rows.Count; i++)
+            {
+                groups.Add(new GroupData()
+                {
+                    GroupName = range.Cells[i,1].Value,
+                    GroupHeader = range.Cells[i, 2].Value,
+                    GroupFooter = range.Cells[i, 3].Value
+                }
+                    );
+            }
+
+            wb.Close();
+            app.Visible = false;
+            app.Quit();
+            return groups;
+        }
+        [Test, TestCaseSource("GroupDataFromExcelFile")]
         public void GroupCreationTest(GroupData group)
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();
@@ -33,5 +105,6 @@ namespace WebAddressbookTests
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
         }
+
     }
 }

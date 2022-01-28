@@ -13,6 +13,10 @@ namespace WebAddressbookTests
         {
             GroupName = groupname;
         }
+        public GroupData()
+        {
+            
+        }
 
         public string GroupName { get; set; }
        

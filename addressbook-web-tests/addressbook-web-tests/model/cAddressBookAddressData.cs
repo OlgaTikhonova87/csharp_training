@@ -6,39 +6,39 @@ namespace WebAddressbookTests
   public class AddressData : IEquatable<AddressData>, IComparable<AddressData>
     {
 
-        public string firstname;
-        public string middlename = "";
-        public string lastname = "";
-        public string nickname = "";
-        public string title = "";
-        public string company = "";
-        public string address = "";
-        public string homephone = "";
-        public string mobilephone = "";
-        public string workphone = "";
-        public string fax = "";
-        public string mail1 = "";
-        public string mail2 = "";
-        public string mail3 = "";
-        public string homepage = "";
-        public string address2 = "";
-        public string phone2 = "";
-        public string notes = "";
-        public string bday = "";
-        public string bmonth = "";
-        public string byear = "";
-        public string aday = "";
-        public string amonth = "";
-        public string ayear = "";
-        public string group = "";
-        public string photo = "";
+        //public string firstname;
+        //public string middlename = "";
+        //public string lastname = "";
+        //public string nickname = "";
+        //public string title = "";
+        //public string company = "";
+        //public string address = "";
+        //public string homephone = "";
+        //public string mobilephone = "";
+        //public string workphone = "";
+        //public string fax = "";
+        //public string mail1 = "";
+        //public string mail2 = "";
+        //public string mail3 = "";
+        //public string homepage = "";
+        //public string address2 = "";
+        //public string phone2 = "";
+        //public string notes = "";
+        //public string bday = "";
+        //public string bmonth = "";
+        //public string byear = "";
+        //public string aday = "";
+        //public string amonth = "";
+        //public string ayear = "";
+        //public string group = "";
+        //public string photo = "";
         public string allPhones;
         public string allInformation;
         public string allMails;
         public string allFio;
-        public string detmails ;
-        public string detgeneral ;
-        public string detphones ;
+        public string detmails;
+        public string detgeneral;
+        public string detphones;
 
 
 
@@ -46,6 +46,10 @@ namespace WebAddressbookTests
         {
             FirstName = firstname;
             LastName = lastname;
+        }
+        public AddressData()
+        {
+
         }
 
         public string FirstName { get; set; }
