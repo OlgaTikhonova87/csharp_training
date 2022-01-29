@@ -6,6 +6,7 @@ namespace WebAddressbookTests
 {
     public class bBaseTest
     {
+        public static bool PERFORM_LONG_UI_CHECKS = true;
         protected mApplicationManager app;
         [SetUp]
         public void SetupApplicationManager()

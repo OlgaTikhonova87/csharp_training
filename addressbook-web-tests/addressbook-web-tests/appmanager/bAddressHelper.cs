@@ -118,9 +118,17 @@ namespace WebAddressbookTests
             return this;
         }
         //MODIFICATION
+        public bAddressHelper ModifyAddress(AddressData address, int index)
+        {
+            AddressModificationInitiation(index);
+            FillAddressForm(address);
+            SubmitAddressModification();
+            OpenAddressBook();
+            return this;
+        }
         public bAddressHelper ModifyAddress(AddressData address)
         {
-            AddressModificationInitiation(1);
+            AddressModificationInitiation(address.ID);
             FillAddressForm(address);
             SubmitAddressModification();
             OpenAddressBook();
@@ -128,9 +136,18 @@ namespace WebAddressbookTests
         }
         public bAddressHelper AddressModificationInitiation(int index)
         {
-            driver.FindElements(By.Name("entry"))[index]
-                .FindElements(By.TagName("td"))[7]
-                .FindElement(By.TagName("a")).Click();
+            //driver.FindElements(By.Name("entry"))[index]
+            //    .FindElements(By.TagName("td"))[7]
+            //    .FindElement(By.TagName("a")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value= '" + index + "'])")).Click();
+            return this;
+        }
+            public bAddressHelper AddressModificationInitiation(string index)
+        {
+            //driver.FindElements(By.Name("entry"))[index]
+            //    .FindElements(By.TagName("td"))[7]
+            //    .FindElement(By.TagName("a")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value= '" + index + "'])")).Click();
             return this;
         }
         public bAddressHelper SubmitAddressModification()
@@ -140,9 +157,9 @@ namespace WebAddressbookTests
             return this;
         }
         //REMOVE
-        public bAddressHelper RemoveAddress()
+        public bAddressHelper RemoveAddress(AddressData address)
         {
-            driver.FindElement(By.Name("selected[]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value= '" + address.ID + "'])")).Click();
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             addressCache = null;
             driver.SwitchTo().Alert().Accept();

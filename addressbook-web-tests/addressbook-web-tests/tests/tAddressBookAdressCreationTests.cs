@@ -49,10 +49,10 @@ namespace WebAddressbookTests
         [Test, TestCaseSource("ContactDataFromJsonFile")]
         public void AddressCreationTest(AddressData address)
         {
-            List<AddressData> oldAddress = app.Address.GetAddressList();
+            List<AddressData> oldAddress = AddressData.GetAllContacts();
             app.Address.CreateAddress(address);
             Assert.AreEqual(oldAddress.Count + 1, app.Address.GetAddressCount());
-            List<AddressData> newAddress = app.Address.GetAddressList();
+            List<AddressData> newAddress = AddressData.GetAllContacts();
             oldAddress.Add(address);
             oldAddress.Sort();
             newAddress.Sort();

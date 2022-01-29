@@ -1,37 +1,15 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using LinqToDB.Mapping;
+using System.Linq;
+using System.Collections.Generic;
+
 
 namespace WebAddressbookTests
 {
-  public class AddressData : IEquatable<AddressData>, IComparable<AddressData>
+    [Table(Name = "addressbook")]
+    public class AddressData : IEquatable<AddressData>, IComparable<AddressData>
     {
-
-        //public string firstname;
-        //public string middlename = "";
-        //public string lastname = "";
-        //public string nickname = "";
-        //public string title = "";
-        //public string company = "";
-        //public string address = "";
-        //public string homephone = "";
-        //public string mobilephone = "";
-        //public string workphone = "";
-        //public string fax = "";
-        //public string mail1 = "";
-        //public string mail2 = "";
-        //public string mail3 = "";
-        //public string homepage = "";
-        //public string address2 = "";
-        //public string phone2 = "";
-        //public string notes = "";
-        //public string bday = "";
-        //public string bmonth = "";
-        //public string byear = "";
-        //public string aday = "";
-        //public string amonth = "";
-        //public string ayear = "";
-        //public string group = "";
-        //public string photo = "";
         public string allPhones;
         public string allInformation;
         public string allMails;
@@ -40,9 +18,7 @@ namespace WebAddressbookTests
         public string detgeneral;
         public string detphones;
 
-
-
-        public AddressData(string firstname, string lastname) 
+        public AddressData(string firstname, string lastname)
         {
             FirstName = firstname;
             LastName = lastname;
@@ -51,40 +27,66 @@ namespace WebAddressbookTests
         {
 
         }
-
+        [Column(Name = "firstname")]
         public string FirstName { get; set; }
-
+        [Column(Name = "middlename")]
         public string MiddleName { get; set; }
+        [Column(Name = "lastname")]
         public string LastName { get; set; }
+        [Column(Name = "nickname")]
         public string NickName { get; set; }
+        [Column(Name = "title")]
         public string Title { get; set; }
+        [Column(Name = "company")]
         public string Company { get; set; }
+        [Column(Name = "address")]
         public string Address { get; set; }
+        [Column(Name = "home")]
         public string HomePhone { get; set; }
+        [Column(Name = "mobile")]
         public string MobilePhone { get; set; }
+        [Column(Name = "work")]
         public string WorkPhone { get; set; }
+        [Column(Name = "fax")]
         public string Fax { get; set; }
+        [Column(Name = "email")]
         public string Mail1 { get; set; }
+        [Column(Name = "email2")]
         public string Mail2 { get; set; }
+        [Column(Name = "email3")]
         public string Mail3 { get; set; }
+        [Column(Name = "homepage")]
         public string HomePage { get; set; }
+        [Column(Name = "notes")]
         public string Notes { get; set; }
+        [Column(Name = "phone2")]
         public string Phone2 { get; set; }
+        [Column(Name = "address2")]
         public string Address2 { get; set; }
+        [Column(Name = "bday")]
         public string BDay { get; set; }
+        [Column(Name = "bmonth")]
         public string BMonth { get; set; }
+        [Column(Name = "byear")]
         public string BYear { get; set; }
+        [Column(Name = "aday")]
         public string ADay { get; set; }
+        [Column(Name = "amonth")]
         public string AMonth { get; set; }
+        [Column(Name = "ayear")]
         public string AYear { get; set; }
         public string Group { get; set; }
+        [Column(Name = "photo")]
         public string Photo { get; set; }
         public string Home { get; set; }
+        [Column(Name = "id"), PrimaryKey, Identity]
+        public string ID { get; set; }
 
-        public string AllPhones {
+        public string AllPhones
+        {
             get
-            { 
-            if (allPhones != null)
+            {
+                if (allPhones != null)
                 {
                     return allPhones;
                 }
@@ -92,10 +94,10 @@ namespace WebAddressbookTests
                 {
 
                     return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone) + CleanUp(Phone2)).Trim();
-                   
+
                 }
             }
-            set 
+            set
             {
                 allPhones = value;
             }
@@ -154,7 +156,7 @@ namespace WebAddressbookTests
                         + (!string.IsNullOrEmpty(Title) ? $"{Title}\r\n" : string.Empty)
                         + (!string.IsNullOrEmpty(Company) ? $"{Company}\r\n" : string.Empty)
                         + (!string.IsNullOrEmpty(Address) ? $"{Address}\r\n" : string.Empty);
-;
+                    ;
                 }
             }
             set
@@ -228,7 +230,7 @@ namespace WebAddressbookTests
         {
             if (phone == null || phone == "")
             {
-                return ""; 
+                return "";
             }
             return Regex.Replace(phone, "[ ()-]", "") + "\r\n";
         }
@@ -280,6 +282,14 @@ namespace WebAddressbookTests
         {
             return "name=" + FirstName + " " + LastName;
         }
+        public static List<AddressData> GetAllContacts()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from g in db.Contacts select g).ToList();
+            }
+        }
+
     }
 }
 
