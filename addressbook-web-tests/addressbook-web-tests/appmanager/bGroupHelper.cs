@@ -50,7 +50,7 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToGroupsPage();
 
-            SelectGroup(group.ID);
+            SelectGroup(group.Id);
             InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();
@@ -86,7 +86,7 @@ namespace WebAddressbookTests
         public bGroupHelper Remove(GroupData group)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectGroup(group.ID);
+            SelectGroup(group.Id);
             Removal();
             manager.Navigator.GoToGroupsPage();
             return this;
@@ -142,7 +142,7 @@ namespace WebAddressbookTests
                 foreach (IWebElement element in elements)
                 {
 
-                    groupCache.Add(new GroupData(element.Text) { ID = element.FindElement(By.TagName("input")).GetAttribute("value") });
+                    groupCache.Add(new GroupData(element.Text) { Id = element.FindElement(By.TagName("input")).GetAttribute("value") });
                 }
             }
 

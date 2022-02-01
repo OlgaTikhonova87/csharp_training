@@ -26,8 +26,8 @@ namespace WebAddressbookTests
         public string GroupHeader { get; set; }
         [Column(Name = "group_footer")]
         public string GroupFooter { get; set; }
-        [Column(Name = "group_id"), PrimaryKey, Identity]
-        public string ID { get; set; }
+        [Column(Name = "group_id"), PrimaryKey]
+        public string Id { get; set; }
         public bool Equals(GroupData other)
         {
             if (Object.ReferenceEquals(other, null))
@@ -57,10 +57,20 @@ namespace WebAddressbookTests
 
             return GroupName.CompareTo(other.GroupName);
         }
-        public static List<GroupData> GetAll() {
+        public static List<GroupData> GetAll() 
+        {
             using (AddressBookDB db = new AddressBookDB())
             {
                return  (from g in db.Groups select g).ToList();
+            }
+        }
+        public List<AddressData> GetContaracts()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts
+                        from gcr in db.GCR.Where(p => p.GroupID == this.Id && p.ContactID == c.Id && c.Deprecated == "0000-00-00 00:00:00")
+                        select c).Distinct().ToList();
             }
         }
     }

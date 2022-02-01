@@ -80,7 +80,9 @@ namespace WebAddressbookTests
         public string Photo { get; set; }
         public string Home { get; set; }
         [Column(Name = "id"), PrimaryKey, Identity]
-        public string ID { get; set; }
+        public string Id { get; set; }
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; set; }
 
         public string AllPhones
         {
@@ -287,6 +289,14 @@ namespace WebAddressbookTests
             using (AddressBookDB db = new AddressBookDB())
             {
                 return (from g in db.Contacts select g).ToList();
+            }
+        }
+        public static List<AddressData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from g in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00"
+                        ) select g).ToList();
             }
         }
 

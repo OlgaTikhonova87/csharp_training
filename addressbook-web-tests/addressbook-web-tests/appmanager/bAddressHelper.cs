@@ -32,6 +32,56 @@ namespace WebAddressbookTests
             return test;
 
         }
+
+        public void AddContactToGroup(AddressData contact, GroupData group)
+        {
+            manager.Navigator.OpenHomePage();
+            ClearGroupFilter();
+            SelectContact(contact.Id);
+            SelectGroupToAdd(group.GroupName);
+            CommitAddingContactToGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        public void DeleteContactFromGroup(AddressData contact, GroupData group)
+        {
+            manager.Navigator.OpenHomePage();
+            SelectGroupFilter(group.GroupName);
+            SelectContact(contact.Id);
+            CommitDeleteContactFronmGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        public void SelectGroupFilter(string groupName)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(groupName);
+        }
+
+        public void CommitAddingContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
+        public void CommitDeleteContactFronmGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+        }
+        public void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        public void SelectContact(string contactId)
+        {
+            driver.FindElement(By.Id(contactId)).Click();
+        }
+
+        public void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
+        }
+
         public string GetContractInformationFromDetails(int index)
         {
             manager.Navigator.OpenHomePage();
@@ -128,7 +178,7 @@ namespace WebAddressbookTests
         }
         public bAddressHelper ModifyAddress(AddressData address)
         {
-            AddressModificationInitiation(address.ID);
+            AddressModificationInitiation(address.Id);
             FillAddressForm(address);
             SubmitAddressModification();
             OpenAddressBook();
@@ -159,7 +209,7 @@ namespace WebAddressbookTests
         //REMOVE
         public bAddressHelper RemoveAddress(AddressData address)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value= '" + address.ID + "'])")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value= '" + address.Id + "'])")).Click();
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             addressCache = null;
             driver.SwitchTo().Alert().Accept();
