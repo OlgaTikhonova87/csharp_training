@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -24,8 +23,8 @@ namespace WebAddressbookTests
             Assert.AreEqual(oldAddress.Count - 1, app.Address.GetAddressCount());
             List<AddressData> newAddress = AddressData.GetAllContacts();
             oldAddress.RemoveAt(0);
-            //oldAddress.Sort();
-            //newAddress.Sort();
+            oldAddress.Sort();
+            newAddress.Sort();
             //Assert.AreEqual(oldAddress, newAddress);
         }
     }

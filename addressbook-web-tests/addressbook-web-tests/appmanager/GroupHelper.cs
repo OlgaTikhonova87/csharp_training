@@ -6,18 +6,12 @@ namespace WebAddressbookTests
 {
     public class bGroupHelper : HelperBase
     {
-
         public bGroupHelper(mApplicationManager manager) : base(manager)
         {
 
         }
         //CREATION
-        //public bGroupHelper InitCreation()
-        //{
-        //    driver.FindElement(By.LinkText("add new")).Click();
-        //    return this;
-        //}
-     
+
         public bGroupHelper Create(GroupData groupdata)
         {
             manager.Navigator.GoToGroupsPage();
@@ -27,7 +21,6 @@ namespace WebAddressbookTests
             manager.Navigator.GoToGroupsPage();
             return this;
         }
-
         public bGroupHelper InitGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();

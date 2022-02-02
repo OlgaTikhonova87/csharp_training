@@ -3,7 +3,6 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Runtime;
 
 namespace WebAddressbookTests
 {
@@ -30,9 +29,7 @@ namespace WebAddressbookTests
                 AllMails = allMails
             };
             return test;
-
         }
-
         public void AddContactToGroup(AddressData contact, GroupData group)
         {
             manager.Navigator.OpenHomePage();
@@ -53,12 +50,10 @@ namespace WebAddressbookTests
             new WebDriverWait(driver, TimeSpan.FromSeconds(10))
                 .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
         }
-
         public void SelectGroupFilter(string groupName)
         {
             new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(groupName);
         }
-
         public void CommitAddingContactToGroup()
         {
             driver.FindElement(By.Name("add")).Click();
@@ -76,25 +71,21 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.Id(contactId)).Click();
         }
-
         public void ClearGroupFilter()
         {
             new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
         }
-
         public string GetContractInformationFromDetails(int index)
         {
             manager.Navigator.OpenHomePage();
             OpenDetails(index);
             return GetDetailInformation();
         }
-
         private string GetDetailInformation()
         {
             string DetailText = driver.FindElement(By.XPath("//div[@id = 'content']")).Text;
             return DetailText;
         }
-
         private bAddressHelper OpenDetails(int index)
         {
             driver.FindElements(By.Name("entry"))[index]
@@ -186,17 +177,11 @@ namespace WebAddressbookTests
         }
         public bAddressHelper AddressModificationInitiation(int index)
         {
-            //driver.FindElements(By.Name("entry"))[index]
-            //    .FindElements(By.TagName("td"))[7]
-            //    .FindElement(By.TagName("a")).Click();
             driver.FindElement(By.XPath("(//input[@name='selected[]' and @value= '" + index + "'])")).Click();
             return this;
         }
             public bAddressHelper AddressModificationInitiation(string index)
         {
-            //driver.FindElements(By.Name("entry"))[index]
-            //    .FindElements(By.TagName("td"))[7]
-            //    .FindElement(By.TagName("a")).Click();
             driver.FindElement(By.XPath("(//input[@name='selected[]' and @value= '" + index + "'])")).Click();
             return this;
         }
@@ -263,13 +248,11 @@ namespace WebAddressbookTests
             driver.FindElement(By.XPath("/html/body/div/div[2]/a/img")).Click();
             return this;
         }
-
         public int GetAddressCount()
         {
             int i = driver.FindElements(By.CssSelector("tr[name='entry']")).Count;
             return i;
         }
-
         private List<AddressData> addressCache = null;
         public List<AddressData> GetAddressList()
         {
@@ -277,7 +260,6 @@ namespace WebAddressbookTests
             {
                 addressCache = new List<AddressData>();
                 OpenAddressBook();
-               // List<AddressData> address = new List<AddressData>();
                 ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name='entry']"));
 
                 foreach (IWebElement element in elements)
