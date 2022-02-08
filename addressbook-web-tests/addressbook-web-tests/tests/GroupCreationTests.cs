@@ -80,7 +80,7 @@ public static IEnumerable<GroupData> GroupDataFromCsvFile()
             app.Quit();
             return groups;
         }
-        [Test, TestCaseSource("GroupDataFromExcelFile")]
+        [Test, TestCaseSource("GroupDataFromJsonFile")]
         public void GroupCreationTest(GroupData group)
         {
             List<GroupData> oldGroups =  GroupData.GetAll();

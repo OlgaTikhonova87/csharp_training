@@ -234,7 +234,10 @@ namespace WebAddressbookTests
             Type(By.Name("phone2"), address.Phone2);
             Type(By.Name("notes"), address.Notes);
             Type(By.Name("byear"), address.BYear);
-            Type(By.Name("ayear"), address.AYear);
+            //Type(By.Name("ayear"), address.AYear);
+            //driver.FindElement(By.Name("new_group")).;
+            new SelectElement(driver.FindElement(By.Name("new_group"))).SelectByValue(address.Group);
+
 
             return this;
         }

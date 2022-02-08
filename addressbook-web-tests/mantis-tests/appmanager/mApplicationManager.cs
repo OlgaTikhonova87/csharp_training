@@ -3,7 +3,7 @@ using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using System.Threading;
-using static System.Net.WebRequestMethods;
+
 
 namespace mantis_tests
 
@@ -19,8 +19,10 @@ namespace mantis_tests
         private static ThreadLocal<mApplicationManager> app = new ThreadLocal<mApplicationManager>();
 
         private mApplicationManager()
-            {
+        {
+
             driver = new FirefoxDriver();
+
             Registration = new RegistrationHalper(this);
             verificationErrors = new StringBuilder();
             Ftp = new FTPHelper(this);

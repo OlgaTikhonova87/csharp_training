@@ -8,3 +8,4 @@ $g_db_password            = '';
 $g_default_timezone       = 'Europe/Berlin';
 
 $g_crypto_master_salt     = 'qhiEOuJ9Z+mbLNOUsCOfs/74JrRSn6jFMegDSLP1cB0=';
+

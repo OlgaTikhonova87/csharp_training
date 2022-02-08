@@ -14,8 +14,7 @@ namespace mantis_tests
     [TestFixture]
 
     public class AccountCreationTest : bBaseTest
-     
-
+    
     {
         [TestFixtureSetUp]
         public void setupConfig()
