@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
-
+﻿using NUnit.Framework;
 namespace mantis_tests
 {
     [TestFixture]
@@ -16,14 +6,17 @@ namespace mantis_tests
     public class AccountCreationTest : bBaseTest
     
     {
+        public string localPath =  @"\config_inc.php";
+        //TestContext.CurrentContext.TestDirectory +
         [TestFixtureSetUp]
         public void setupConfig()
         {
-            app.Ftp.BackupFile("/config/config_inc.php");
-            using (Stream localFile = File.Open("config_inc.php", FileMode.Open))
-            {
-                app.Ftp.Upload("/config/config_inc.php", localFile);
-            }
+            
+            //app.Ftp.BackupFile(localPath);
+            //using (Stream localFile = File.Open("config_inc.php", FileMode.Open))
+            //{
+            //    app.Ftp.Upload(localPath, localFile);
+            //}
                 
         }
         [Test]
@@ -31,15 +24,18 @@ namespace mantis_tests
         {
             AccountData account = new AccountData
             {
-                Name = "testuser",
+                Name = "testuser8",
                 Password = "password",
-                Email = "testuser@localhost.localdomain"
+                Email = "testuser8@localhost"
             };
-            app.Registration.Register(account);
+       //     app.James.Delete(account);
+
+      //      app.Registration.Register(account);
+     //       app.James.Add(account);
         }
         public void restoreConfig()
         {
-            app.Ftp.RestoreBackupFile("/config/config_inc.php");
+            app.Ftp.RestoreBackupFile(localPath);
         }
     }
 }

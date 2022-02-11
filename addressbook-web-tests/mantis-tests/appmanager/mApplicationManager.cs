@@ -4,7 +4,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using System.Threading;
 
-
 namespace mantis_tests
 
 {
@@ -23,9 +22,13 @@ namespace mantis_tests
 
             driver = new FirefoxDriver();
 
-            Registration = new RegistrationHalper(this);
+           // Registration = new RegistrationHalper(this);
+            Projects = new ProjectsHalper(this);
+            Login = new LoginHalper(this);
             verificationErrors = new StringBuilder();
             Ftp = new FTPHelper(this);
+            James = new JamesHelper(this);
+            Mail = new MailHelper(this);
         }
         ~mApplicationManager()
         {
@@ -57,10 +60,13 @@ namespace mantis_tests
             return app.Value;
         }
 
-        public RegistrationHalper Registration { get; set; }
+       // public RegistrationHalper Registration { get; set; }
+        public LoginHalper Login { get; set; }
+        public ProjectsHalper Projects { get; set; }
 
         public FTPHelper Ftp  { get; set; }
-
+        public JamesHelper James { get;  set; }
+        public MailHelper Mail { get; set; }
     }
 }
 

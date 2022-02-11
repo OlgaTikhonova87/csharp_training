@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Net.FtpClient;
 
@@ -26,7 +22,8 @@ namespace mantis_tests
             {
                 return;
             }
-            client.Rename(path, backupPath);
+
+            //client.Rename(path, backupPath);
             
         }
         public void RestoreBackupFile(string path)

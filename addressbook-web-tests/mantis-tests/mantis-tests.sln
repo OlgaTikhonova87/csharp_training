@@ -6,6 +6,10 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mantis-tests", "mantis-tests.csproj", "{9D2613FB-6C5B-4C52-8B34-46544E62DAB9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AB62AD9B-9B90-4054-9391-335D19EF900F}"
+	ProjectSection(SolutionItems) = preProject
+		tests\app.config = tests\app.config
+		..\..\..\..\..\..\Users\olga.tikhonova.FLEX\Downloads\james-binary-2.3.1\james-2.3.1\apps\james\logs\smtpserver-2022-02-10-23-20.log = ..\..\..\..\..\..\Users\olga.tikhonova.FLEX\Downloads\james-binary-2.3.1\james-2.3.1\apps\james\logs\smtpserver-2022-02-10-23-20.log
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
