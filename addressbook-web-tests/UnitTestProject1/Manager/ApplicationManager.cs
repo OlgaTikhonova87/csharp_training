@@ -5,34 +5,35 @@ using OpenQA.Selenium.Firefox;
 using System.Threading;
 
 namespace mantis_tests
-
 {
-    public class mApplicationManager
+    public class ApplicationManager
     {
         protected string baseURL = "http://localhost/mantisbt-2.25.2";
         
         protected IWebDriver driver;
-        private StringBuilder verificationErrors;
+        //private StringBuilder verificationErrors;
 
+        public APIHelper API { get;  set; }
 
-        private static ThreadLocal<mApplicationManager> app = new ThreadLocal<mApplicationManager>();
+        private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
-        private mApplicationManager()
+        private ApplicationManager()
         {
 
             driver = new FirefoxDriver();
 
             // Registration = new RegistrationHalper(this);
             baseURL = "http://localhost/mantisbt-2.25.2";
-             Projects = new ProjectsHalper(this);
+            Projects = new ProjectsHalper(this);
             Login = new LoginHalper(this);
-            verificationErrors = new StringBuilder();
-            Ftp = new FTPHelper(this);
-            James = new JamesHelper(this);
-            Mail = new MailHelper(this);
-            Admin = new AdminHelper(this, baseURL);
+            //verificationErrors = new StringBuilder();
+            API = new APIHelper(this);
+            //Ftp = new FTPHelper(this);
+            //James = new JamesHelper(this);
+            //Mail = new MailHelper(this);
+            //Admin = new AdminHelper(this, baseURL);
         }
-        ~mApplicationManager()
+        ~ApplicationManager()
         {
             try
             {
@@ -43,7 +44,6 @@ namespace mantis_tests
                 // Ignore errors if unable to close the browser
             }
         }
-        
         public IWebDriver Driver 
         {
             get 
@@ -51,25 +51,23 @@ namespace mantis_tests
                 return driver;
             }
         }
-        public static mApplicationManager GetInstance()
+        public static ApplicationManager GetInstance()
         {
             if (!app.IsValueCreated)
             {
-                mApplicationManager NewInstance = new mApplicationManager();
+                ApplicationManager NewInstance = new ApplicationManager();
                 NewInstance.Driver.Url = "http://localhost/mantisbt-2.25.2/login_page.php";
                 app.Value = NewInstance;
             }
             return app.Value;
         }
-
        // public RegistrationHalper Registration { get; set; }
         public LoginHalper Login { get; set; }
         public ProjectsHalper Projects { get; set; }
-
-        public FTPHelper Ftp  { get; set; }
-        public JamesHelper James { get;  set; }
-        public MailHelper Mail { get; set; }
-        public AdminHelper Admin { get; set; }
+        //public FTPHelper Ftp  { get; set; }
+        //public JamesHelper James { get;  set; }
+        //public MailHelper Mail { get; set; }
+        //public AdminHelper Admin { get; set; }
     }
 }
 

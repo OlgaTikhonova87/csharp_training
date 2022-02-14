@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <SSDTUnitTestPath Condition="'$(SSDTUnitTestPath)' == ''">$(VsInstallRoot)\Common7\IDE\Extensions\Microsoft\SQLDB</SSDTUnitTestPath>
   </PropertyGroup>
@@ -14,11 +14,14 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.ServiceFabric.Services.Wcf" Version="5.2.1486" />
     <PackageReference Include="NUnit" Version="2.6.4" />
     <PackageReference Include="OpaqueMail" Version="1.6.6" />
     <PackageReference Include="Selenium.Support" Version="3.6.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.6.0" />
+    <PackageReference Include="SimpleBrowser.WebDriver" Version="0.5.33" />
     <PackageReference Include="System.Net.FtpClient" Version="1.0.5281.14359" />
+    <PackageReference Include="Unity.Wcf" Version="5.11.1" />
   </ItemGroup>
   <ItemGroup>
     <None Update="config_inc.php">
@@ -42,8 +45,14 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Service References\" />
+  </ItemGroup>
   <PropertyGroup>
     <SsdtUnitTestVersion>3.1</SsdtUnitTestVersion>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
   </PropertyGroup>
   <Import Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="$(VisualStudioVersion) != '15.0' And '$(SQLDBExtensionsRefPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="$(VisualStudioVersion) != '15.0' And '$(SQLDBExtensionsRefPath)' == ''" />
