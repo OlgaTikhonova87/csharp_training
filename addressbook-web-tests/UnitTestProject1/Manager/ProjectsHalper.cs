@@ -46,13 +46,17 @@ namespace mantis_tests
          
         public List<ProjectData> GetProjectList()
         {
+            UnitTestProject1.Mantis.MantisConnectPortTypeClient client = new UnitTestProject1.Mantis.MantisConnectPortTypeClient();
+            UnitTestProject1.Mantis.IssueData issue = new UnitTestProject1.Mantis.IssueData();
             OpenManagement();
             OpenProjects();
             projectList.Clear();
+
             ICollection<IWebElement> elements = driver.FindElements(By.XPath("//table[@class='table table-striped table-bordered table-condensed table-hover']/tbody/tr/td/a"));
             foreach (IWebElement element in elements)
             {
-                projectList.Add(new ProjectData() {
+                projectList.Add(new ProjectData()
+                {
                     Name = element.Text
                 });
             }

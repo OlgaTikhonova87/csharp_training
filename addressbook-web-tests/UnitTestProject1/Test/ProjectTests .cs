@@ -11,17 +11,25 @@ namespace mantis_tests
         [Test]
         public void ProjectCreationTest()
         {
+            AccountData account = new AccountData
+            {
+                Name = "administrator",
+                Password = "root"
+            };
             ProjectData project = new ProjectData 
             {
                 Name = "pr0"+DateTime.Now.ToString(),
                 Description = "Description"
             };
-            app.Login.Login();
             
-            List<ProjectData> oldProjects = app.Projects.GetProjectList();
+            var oldProjects = app.API.GetAPIProjectsList(account);
+            //List<ProjectData> oldProjects = app.Projects.GetProjectList();
+
+            app.Login.Login();
             app.Projects.CreateProject(project);
 
-            List<ProjectData> newProjects = app.Projects.GetProjectList();
+            List<ProjectData> newProjects = app.API.GetAPIProjectsList(account);
+            //List<ProjectData> newProjects = app.Projects.GetProjectList();
 
             oldProjects.Add(project);
 
@@ -35,24 +43,43 @@ namespace mantis_tests
         [Test]
         public void ProjectDeletionTest()
         {
-            ProjectData project = new ProjectData {
+            AccountData account = new AccountData
+            {
+                Name = "administrator",
+                Password = "root"
+            };
+            ProjectData newproject = new ProjectData {
                 Name = "pr0" + DateTime.Now.ToString(),
                 Description = "Description"
             };
 
-            app.Login.Login();
-            if (app.Projects.GetProjectList().Count == 0)
+            //if (app.Projects.GetProjectList().Count == 0)
+            //{
+            //    app.Projects.CreateProject(project);
+            //}
+
+            //Проверим, есть ли проекты. Если нет - создадим
+            if (app.API.GetAPIProjectsList(account).Count == 0)
             {
-                app.Projects.CreateProject(project);
+                app.Projects.CreateProject(newproject);
             }
 
-            List<ProjectData> oldProjects = app.Projects.GetProjectList();
-            app.Projects.DeleteProject(project);
+            //получим список проектов через апи и первый из них, который будем удалять
+            List<ProjectData> oldProjects = app.API.GetAPIProjectsList(account);
+            ProjectData delproject = new ProjectData
+            {
+                Name = oldProjects[0].Name,
+                Description = oldProjects[0].Description
+            };
 
-            List<ProjectData> newProjects = app.Projects.GetProjectList();
+            //Удалим интерфейсно и в старом списке
+            app.Login.Login();
+            app.Projects.DeleteProject(delproject);
+            oldProjects.Remove(delproject);
+            //получим по апи список оставшихся проектов
+            List<ProjectData> newProjects = app.API.GetAPIProjectsList(account);
 
-            oldProjects.Remove(project);
-
+            //отсортируеи и сравним
             oldProjects.Sort();
             newProjects.Sort();
 
